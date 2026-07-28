@@ -19,26 +19,26 @@
 	flex-shrink: 0;
 }
 
-/* RailWorks logo — top of sidebar, above navigation */
-.sidebar-brand--railworks {
+/* Solution logo — top of sidebar, above navigation */
+.sidebar-brand--flexfit {
 	flex-shrink: 0;
 	padding: 18px 16px 16px;
 	border-bottom: 1px solid #e8e8e8;
 	text-align: center;
 }
 
-.sidebar-brand--railworks a {
+.sidebar-brand--flexfit a {
 	display: block;
 	line-height: 0;
 	text-decoration: none;
 }
 
-.sidebar-brand--railworks img {
+.sidebar-brand--flexfit img {
 	display: block;
 	max-width: 100%;
-	width: 100%;
+	width: auto;
 	height: auto;
-	max-height: 48px;
+	max-height: 26px;
 	margin: 0 auto;
 	object-fit: contain;
 	object-position: center;

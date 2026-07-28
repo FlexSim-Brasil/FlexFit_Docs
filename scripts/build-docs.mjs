@@ -5,13 +5,13 @@ import * as cheerio from 'cheerio';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const MANUAL_DIR = path.join(ROOT, 'modules', 'RailWorks', 'manual');
-const NAV_FILE = path.join(ROOT, 'modules', 'RailWorks', 'docs', 'nav.html');
+const MANUAL_DIR = path.join(ROOT, 'modules', 'FlexFit', 'manual');
+const NAV_FILE = path.join(ROOT, 'modules', 'FlexFit', 'docs', 'nav.html');
 const CSS_SRC = path.join(ROOT, 'CSS');
 const STAGING_DIR = path.join(ROOT, '.site-staging');
 const SITE_DIR = path.join(ROOT, 'site');
 const BASE_URL = (process.env.BASE_URL ?? '').replace(/\/$/, '');
-const WELCOME_PATH = 'modules/RailWorks/manual/WelcomeToRailWorks.html';
+const WELCOME_PATH = 'modules/FlexFit/manual/WelcomeToFlexFit.html';
 
 let outputDir = STAGING_DIR;
 
@@ -51,27 +51,27 @@ function normalizeSitePath(value) {
 
 function getManualRelativePath(filePath) {
 	const relative = toPosix(path.relative(MANUAL_DIR, filePath));
-	return `modules/RailWorks/manual/${relative}`;
+	return `modules/FlexFit/manual/${relative}`;
 }
 
 function getCssRelativePath(manualRelativePath) {
-	const dirPart = path.posix.dirname(manualRelativePath.replace('modules/RailWorks/manual/', ''));
+	const dirPart = path.posix.dirname(manualRelativePath.replace('modules/FlexFit/manual/', ''));
 	const depth = dirPart === '.' ? 0 : dirPart.split('/').length;
 	const levelsUp = 3 + depth;
 	return '../'.repeat(levelsUp) + 'CSS/';
 }
 
 function getImagesRelativePath(manualRelativePath) {
-	const dirPart = path.posix.dirname(manualRelativePath.replace('modules/RailWorks/manual/', ''));
+	const dirPart = path.posix.dirname(manualRelativePath.replace('modules/FlexFit/manual/', ''));
 	const depth = dirPart === '.' ? 0 : dirPart.split('/').length;
 	return '../'.repeat(depth) + 'Images/';
 }
 
 function buildSidebarHtml(navHtml, imagesPath) {
 	const homeUrl = joinBaseUrl(WELCOME_PATH);
-	return `\t\t\t<div class="sidebar-brand sidebar-brand--railworks">
-\t\t\t\t<a href="${homeUrl}" aria-label="RailWorks Documentation home">
-\t\t\t\t\t<img src="${imagesPath}logo_RW.svg" alt="RailWorks" />
+	return `\t\t\t<div class="sidebar-brand sidebar-brand--flexfit">
+\t\t\t\t<a href="${homeUrl}" aria-label="FlexFit Documentation home">
+\t\t\t\t\t<img src="${imagesPath}logo_FlexFit.png" alt="FlexFit" />
 \t\t\t\t</a>
 \t\t\t</div>
 \t\t\t<div class="sidebar-nav">
@@ -189,10 +189,10 @@ function buildIndex() {
 <head>
 \t<meta charset="UTF-8" />
 \t<meta http-equiv="refresh" content="0; url=${welcomeUrl}" />
-\t<title>RailWorks Documentation</title>
+\t<title>FlexFit Documentation</title>
 </head>
 <body>
-\t<p>Redirecting to <a href="${welcomeUrl}">RailWorks Documentation</a>...</p>
+\t<p>Redirecting to <a href="${welcomeUrl}">FlexFit Documentation</a>...</p>
 </body>
 </html>
 `;
@@ -222,7 +222,7 @@ function main() {
 
 	walkDir(MANUAL_DIR, (filePath) => {
 		const relativePath = path.relative(MANUAL_DIR, filePath);
-		const destPath = path.join(outputDir, 'modules', 'RailWorks', 'manual', relativePath);
+		const destPath = path.join(outputDir, 'modules', 'FlexFit', 'manual', relativePath);
 
 		if (filePath.endsWith('.html')) {
 			buildPage(filePath);
