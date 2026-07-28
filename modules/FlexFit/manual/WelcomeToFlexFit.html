@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to FlexFit</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../CSS/prism.css" />
+		<script src="../../../CSS/prism.js"></script>
+		<style>
+			/* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+			nav li > ul {
+				margin-bottom: 0px !important;
+			}
+
+			img.inline {
+				display: inline;
+				vertical-align: middle;
+				max-height: 1em;
+				margin: 0;
+				margin-right: 0px;
+			}
+
+			/* For the product table color preview: */
+			.preview-color {
+				display: block;
+				border: solid 1px;
+				width: 50px;
+				height: 20px;
+			}
+		</style>
+	</head>
+
+	<body style="text-align: justify">
+		<header>
+			<h1>FlexFit</h1>
+			<nav>
+				<ul>
+					<li><a href="#visao-geral">What FlexFit does</a></li>
+					<li><a href="#execution">Screen fields</a></li>
+					<li><a href="#refit">How Refit works</a></li>
+					<li><a href="#results-summary">Summary panel</a></li>
+					<li><a href="#results-fit">Fit panel</a></li>
+					<li><a href="#graficos">The 6 diagnostic charts</a></li>
+					<li><a href="#exportar">Exporting the diagnostic dashboard</a></li>
+				</ul>
+			</nav>
+		</header>
+
+      <!-- Introduction -->
+      <section id="visao-geral" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">What FlexFit does</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 12px;max-width:76ch;text-align:justify;">FlexFit takes one or more datasets (every column of every file becomes a "dataset"), cleans the values — removing nulls, negatives, zeros and non-numeric entries — and fits a set of statistical distributions to each dataset, in the style of FlexSim's ExpertFit module. The result is, for each dataset, a ranking of distributions by goodness of fit (Score), ready to be used in simulation models.</p>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 12px;max-width:76ch;text-align:justify;">The workflow has two screens: <strong>Execution</strong>, where you point to the files and start processing, and <strong>Results</strong>, where you check data quality and explore the fitted distributions.</p>
+      </section>
+
+      <!-- Execution : screen fields -->
+      <section id="execution" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">Screen fields</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 16px;max-width:76ch;text-align:justify;">The fields appear in this order on screen, from top to bottom.</p>
+
+                <figure style="margin:0 0 22px;">
+          <img src="Images/userguide/ExecutionTab.png" alt="Execution tab" style="max-width:100%;display:block;border:1px solid #ccc;">
+          <figcaption style="font-size:12px;color:#666;margin-top:5px;">Execution tab — input fields and file list.</figcaption>
+        </figure>
+        
+        <h3 id="f-analysis-name" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">1. Analysis Name</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">A free-form name for the analysis (e.g. <em>Compressors</em>, <em>Pumps_Jan2026</em>). It defines the name of the results folder, always in the format:</p>
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:13px;background:#f4f4f4;border:1px solid #ddd;padding:8px 11px;margin:0 0 8px;color:#1a1a1a;">YYMMDD_G_{Name}_V01</div>
+        <p style="font-size:13px;line-height:1.6;color:#666;margin:0 0 10px;max-width:76ch;">YYMMDD = today's date · G = general curves · V01 = first version of this analysis.</p>
+
+        <h3 id="f-file-upload" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">2. File Upload / "Input files" list</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Add one or more files (folder button or drag and drop). Accepted formats: Excel (.xlsx, .xls, .xlsm, .xlsb), CSV (.csv, .tsv, .txt), Parquet and databases (.db, .sqlite). Every numeric column of every file becomes an independent dataset in the final ranking.</p>
+        <div style="border:1px solid #ccc;background:#fafafa;padding:10px 12px;margin:0 0 10px;max-width:76ch;">
+          <strong style="display:block;font-size:13.5px;color:#1a1a1a;margin-bottom:4px;">Duplicate names</strong>
+          <span style="font-size:13.5px;line-height:1.6;color:#333;">You cannot add two files with exactly the same name to the same analysis — this prevents accidentally mixing two versions of the same source file.</span>
+        </div>
+
+        <h3 id="f-worksheet" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">3. Worksheet Name</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Name of the Excel worksheet to read, <strong>per file</strong> — click a file in the list on the right to edit its worksheet individually. Leave it empty to always use the first sheet of the file.</p>
+
+        <h3 id="f-output" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">4. Output Path and Same location as input</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Manually pick the folder where the analysis will be saved, or turn on <em>Same location as input</em> to save each result automatically in the folder of its source file.</p>
+        <p style="font-size:13.5px;line-height:1.6;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">If the files come from different folders, each source folder becomes a <strong>separate analysis</strong> — Run processes one at a time.</p>
+
+        <h3 id="f-refit" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">5. Refit</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Optional checkbox next to the Run button. See <a href="#refit">How Refit works</a> — worth understanding before deciding whether to turn it on.</p>
+
+        <h3 id="f-run" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">6. Run</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Starts the data cleaning and the distribution fitting. A progress bar follows the steps; when it finishes, the app switches on its own to the <em>Results</em> tab with a summary of the files and datasets processed.</p>
+      </section>
+
+      <!-- Execution : Refit -->
+      <section id="refit" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">How Refit works</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 12px;max-width:76ch;text-align:justify;">After the <strong>Initial Fit</strong> — the first round of distribution fitting, applied to the original sample — each dataset already has a ranking of distributions by Score. With <strong>Refit</strong> on, FlexFit takes the <strong>top 3 distributions</strong> from that ranking and runs a second test: it generates a synthetic sample from the already-fitted parameters of each one, then refits the distribution on that synthetic sample.</p>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 12px;max-width:76ch;text-align:justify;">This works as a second opinion — if the distribution really does describe the data well, it should keep fitting well to synthetic data generated from itself. When the refit finds a better fit, it replaces the original entry in the ranking; when it does not, the Initial Fit result is kept.</p>
+        <div style="border:1px solid #ccc;background:#fafafa;padding:10px 12px;margin:0 0 10px;max-width:76ch;">
+          <strong style="display:block;font-size:13.5px;color:#1a1a1a;margin-bottom:4px;">When to turn it on</strong>
+          <span style="font-size:13.5px;line-height:1.6;color:#333;">Recommended for final simulation decisions, where confirming the top 3 is worth it. You can leave it off for a quick first exploration of the data — Refit adds processing time.</span>
+        </div>
+      </section>
+
+      <!-- Results : Summary panel -->
+      <section id="results-summary" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">Summary panel</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 16px;max-width:76ch;text-align:justify;">At the top, the <strong>Input file</strong> selector chooses which dataset you are looking at — if the analysis has more than one file or more than one valid column, each one appears here. Changing the dataset in this selector automatically updates the Fit panel beside it.</p>
+
+                <figure style="margin:0 0 22px;">
+          <img src="Images/userguide/ResultsTab.png" alt="Results tab" style="max-width:100%;display:block;border:1px solid #ccc;">
+          <figcaption style="font-size:12px;color:#666;margin-top:5px;">Results tab — overview: Summary (left) and Fit (right) panels.</figcaption>
+        </figure>
+        <figure style="margin:0 0 22px;">
+          <img src="Images/userguide/SummaryPanel.png" alt="Summary panel" style="max-width:100%;display:block;border:1px solid #ccc;">
+          <figcaption style="font-size:12px;color:#666;margin-top:5px;">Summary panel — Data Quality and Statistics.</figcaption>
+        </figure>
+        
+        <table style="width:100%;font-size:13px;margin:0 0 8px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:130px;">Block</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:160px;">Field</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;">What it shows</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="5" style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">Data Quality</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Total Data</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Total number of rows read from the column, before any cleaning.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Null Data</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Empty/null cells found.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Non-numeric</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Values that could not be converted to a number.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Zero Values</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Values equal to zero (removed from the fit).</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Negative Values</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Negative values (removed from the fit).</td>
+            </tr>
+            <tr>
+              <td rowspan="4" style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">Statistics</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Data Used</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">How many values remained after cleaning — this is the sample that feeds the fit.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Minimum / Maximum</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Smallest and largest value of the cleaned sample.*</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Mean / Median</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Mean and median of the cleaned sample.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Std Dev</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Standard deviation of the cleaned sample.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:12.5px;line-height:1.6;color:#666;margin:0;">* Min and Max are rounded to 3 decimal places for display only.</p>
+      </section>
+
+      <!-- Results : Fit panel -->
+      <section id="results-fit" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">Fit panel</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 16px;max-width:76ch;text-align:justify;">Lists every distribution tested for the current dataset, sorted by <strong>Score</strong> (0 to 100 — the higher, the better the fit). Tick a row's checkbox to see its details; tick more than one to overlay the curves on the chart beside it and compare them visually.</p>
+
+                <figure style="margin:0 0 22px;">
+          <img src="Images/userguide/FitPanel.png" alt="Fit panel" style="max-width:100%;display:block;border:1px solid #ccc;">
+          <figcaption style="font-size:12px;color:#666;margin-top:5px;">Fit panel — distribution list, formula, parameters and chart.</figcaption>
+        </figure>
+        
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 8px;max-width:76ch;text-align:justify;">The focused distribution appears in a format ready to use in FlexSim, and the icon beside it copies the whole string (name + parameters):</p>
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:13px;background:#f4f4f4;border:1px solid #ddd;padding:8px 11px;margin:0 0 18px;color:#1a1a1a;">beta(1.26667, 9095.97, 0.443915, 2.58057)</div>
+
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">The badge next to the Score summarises the quality of the fit:</p>
+        <table style="width:100%;max-width:640px;font-size:13px;margin:0 0 8px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:120px;">Badge</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;">What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#e6f4ea;border:1px solid #b7dcc3;color:#1a6b3a;">Good</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Good fit — you can use it with confidence.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#faf1de;border:1px solid #e7cf9e;color:#8a5a11;">Acceptable</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Acceptable, but worth checking the diagnostic charts before deciding.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#fbe9e9;border:1px solid #eec4c4;color:#a4292f;">Poor</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Low score — the distribution did not fit the data well.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Results : Charts -->
+      <section id="graficos" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">The 6 diagnostic charts</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 16px;max-width:76ch;text-align:justify;">Below the table, choose the chart type to visually assess the ticked distribution(s).</p>
+                <figure style="margin:0 0 20px;">
+          <img src="Images/userguide/ChartTypeSelector.png" alt="Chart type selector" style="max-width:360px;display:block;border:1px solid #ccc;">
+          <figcaption style="font-size:12px;color:#666;margin-top:5px;">Chart type selector and the Show All Fits checkbox, below the chart in the Fit panel.</figcaption>
+        </figure>
+        
+        <table style="width:100%;font-size:13px;margin:0 0 8px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:22%;">Chart</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:48%;">What it shows</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:30%;">Good sign</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">Histogram + KDE + PDF</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Bars (real data) + KDE (non-parametric smoothing) vs. the theoretical PDF of the fitted model.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">The PDF line runs through the centre of the bars and follows the KDE.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">Frequency Comparison</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Observed relative frequency (bars) vs. the frequency expected by the model (line), per bin.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">The expected line follows the top of the bars.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">Empirical vs Theoretical CDF</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Empirical CDF (Hazen method) vs. the theoretical CDF of the model, step by step.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">The curves overlap across the whole domain.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">CDF Difference</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">ECDF(x) − F(x): the CDF residual point by point; the shaded area shows the direction and size of the deviation.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">The curve oscillates near zero, with no persistent trend.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">Q-Q Plot</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Theoretical quantiles (x axis) vs. empirical quantiles (y axis), with a 95% confidence band.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Points sit on the diagonal and inside the confidence band.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">P-P Plot</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Theoretical probability (x axis) vs. empirical probability (y axis), on the [0,1]×[0,1] square.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Points sit on the diagonal across the whole probability range.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Results : Export -->
+      <section id="exportar" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">Exporting the diagnostic dashboard</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 16px;max-width:76ch;text-align:justify;">The <strong>Export</strong> button, below the distribution table, generates a single PNG image with the 6 charts side by side (2×3 grid), a header with the dataset name and a title on each panel — ready to paste into a report or send by e-mail, with no dependency on any file in the results folder.</p>
+
+                <figure style="margin:0 0 18px;">
+          <img src="Images/userguide/ExportedDashboard.png" alt="Exported diagnostic dashboard" style="max-width:100%;display:block;border:1px solid #ccc;">
+          <figcaption style="font-size:12px;color:#666;margin-top:5px;">Example of an exported dashboard — the 6 charts in a 2×3 grid, with header and dataset name.</figcaption>
+        </figure>
+        
+        <div style="border:1px solid #ccc;background:#fafafa;padding:10px 12px;margin:0 0 10px;max-width:76ch;">
+          <strong style="display:block;font-size:13.5px;color:#1a1a1a;margin-bottom:4px;">It goes stale if you change the selection</strong>
+          <span style="font-size:13.5px;line-height:1.6;color:#333;">The exported PNG reflects the distribution(s) ticked in the table at the moment you click — change the selection before exporting if you want to compare a different combination.</span>
+        </div>
+      </section>
+	</body>
+</html>
