@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>RailWorks ProcessFlow Tasks</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../CSS/prism.css" />
+		<script src="../../../CSS/prism.js"></script>
+		<style>
+			/* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+			nav li > ul {
+				margin-bottom: 0px !important;
+			}
+
+			img.inline {
+				display: inline;
+				vertical-align: middle;
+				max-height: 1em;
+				margin: 0;
+				margin-right: 0px;
+			}
+
+			/* For the product table color preview: */
+			.preview-color {
+				display: block;
+				border: solid 1px;
+				width: 50px;
+				height: 20px;
+			}
+
+			#cssTable td {
+				vertical-align: middle;
+				text-align: justify;
+			}
+
+			#cssTable p {
+				margin: 0;
+				padding: 0;
+			}
+
+			.image-icon {
+				width: 40%;
+			}
+
+			.image-gui {
+				width: 40%;
+				object-fit: cover;
+				border: 1px solid grey;
+			}
+		</style>
+	</head>
+
+	<body style="text-align: justify">
+		<header>
+			<h1>RailWorks Processflow Tasks</h1>
+			<nav>
+				<ul>
+					<li><a href="#intro">RailWorks Processflow</a></li>
+					<li><a href="#processflowtasks">Processflow Tasks</a></li>
+					<li>
+						<a href="#panels">Processflow Configuration Panels</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<section id="intro">
+			<h2>RailWorks Processflow</h2>
+			<p>
+				RailWorks objects use some information provided by the user to
+				work, trains need to know what their next destination is, Rail
+				Control Points need to know when to trigger their related tasks.
+				This control is given to the user via ProcessFlow custom
+				activities, which are all part of the RailWorks library.
+				<br /><br />
+				Via ProcessFlow the user can determine which tasks to perform as
+				the tokens flow through the fluxogram, using not only the
+				default FlexSim activities but also custom ones designed
+				specifically for the RailWorks library.
+			</p>
+		</section>
+
+		<section id="processflowtasks">
+			<h2>ProcessFlow Tasks</h2>
+			<table id="cssTable">
+				<thead>
+					<th>Name and Icon</th>
+					<th>Description</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<p>Create Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/CreateTrain.png"
+							/>
+						</td>
+						<td>Creates a train object on a target rail object.</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Destroy Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/DestroyTrain.png"
+							/>
+						</td>
+						<td>
+							Removes a train object (locomotive and wagons) from
+							the model.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Move Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/MoveTrain.png"
+							/>
+						</td>
+						<td>
+							Sets the next destination for the target train, this
+							information is then used by the RailWorks path
+							algorithm to determine the route used by the train
+							to get to its destiny.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Move Wagon</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/MoveWagon.png"
+							/>
+						</td>
+						<td>
+							Sets the next destination for the target wagon, this
+							information is then used by the RailWorks path
+							algorithm to determine the route used by the wagon
+							to get to its destiny.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Create Wagon</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/CreateWagon.png"
+							/>
+						</td>
+						<td>
+							Creates a group of Wagons on target RailControlPoint.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Couple Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/CoupleTrain.png"
+							/>
+						</td>
+						<td>
+							Connects the locomotive to a group of wagons. When
+							the train is coupled with more wagons, the model
+							will start to consider anyone of them as a Flowitem.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Decouple Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/DecoupleTrain.png"
+							/>
+						</td>
+						<td>
+							Disconnects the locomotive to a group of wagons.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Load Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/LoadTrain.png"
+							/>
+						</td>
+						<td>
+							The Load Train task starts the load method with the
+							train object and the station connected to the
+							current rail. This removes the content from the
+							station and adds it to the train's current load.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Unload Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/UnloadTrain.png"
+							/>
+						</td>
+						<td>
+							The Unload Train task starts the unload method with
+							the train object and the station connected to the
+							current rail. This adds content to the station and
+							removes it from the train's current load.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Fuel Train</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/FuelTrain.png"
+							/>
+						</td>
+						<td>
+							This task activates the fuel method on the train and
+							the station connected to the current rail. This adds
+							fuel value to the train, until full, so that it can 
+							continue to move on the rail system.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Crane Load</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/CraneLoad.png"
+							/>
+						</td>
+						<td>
+							This task loads an item from a Wagon into a Crane,
+							making it so the Crane will hold the loaded item
+							until a CraneUnload task is fired.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Crane Unload</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/CraneUnload.png"
+							/>
+						</td>
+						<td>
+							This task unloads the item held by the crane in the
+							destination of choice.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Send to Portal</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/SendToPortal.png"
+							/>
+						</td>
+						<td>
+							This task sends a composition to an assigned GIS Portal,
+							this object allow the user to integrate the GIS Map feature
+							to RailWorks module.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Assign Headway Tag</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/AssignHeadwayTag.png"
+							/>
+						</td>
+						<td>
+							This task sets on the locomotive the headway tag and the value will be used to identified the locomotive 
+							on the headway outputs.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Get Compartments</p>
+							<img
+								class="image-icon"
+								src="Images/processflow/GetCompartments.png"
+							/>
+						</td>
+						<td>
+							This task gets the locomotives and wagons on the referenced object. It accepts Rails, RailControlPoints, 
+							Locomotives and Wagons.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section id="panels">
+			<h2>Configuration Panels</h2>
+			<h3>Create Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/CreateTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Create Train panel:</p>
+			<p>
+				<strong>Source Train: </strong>Sets the Source that the Train
+				will be created.<br />
+				<strong>Locomotive Type: </strong>Sets the Locomotive Type
+				created.<br />
+				<strong>Train Color: </strong>Sets the train color.<br />
+				<strong>Customize Locomotive Speeds: </strong>Pops up the speed table
+				allowing customized acceleration, deceleration, uncoupled and coupled max speeds values
+				for loaded and unloaded scenarios.<br />
+				<strong>Assign To Label: </strong>Sets the label in token to
+				save the train.<br />
+				<strong>Reverse Create: </strong>Sets if the train will be
+				created reversed.<br />
+				<strong>Max Weight: </strong>Sets the max weight that the train
+				will be able to carry.<br />
+				<strong>Current Weight: </strong>Sets the initial weight for the
+				train.<br />
+				<strong>Max Fuel: </strong>Sets the max fuel that the train will
+				have.<br />
+				<strong>Current Fuel: </strong>Sets the initial fuel for the
+				train.<br />
+				<strong>Fuel Usage: </strong>Sets the fuel usage per unit.<br />
+				<strong>Assign labels to Created Objects: </strong>Assign labels to Locomotive 
+				during creation.
+			</p>
+
+			<h3>Destroy Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/DestroyTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Destroy Train panel:</p>
+			<p>
+				<strong>Object(s): </strong>Sets the objects to be destroyed.<br />
+				<strong>Sink: </strong>Sets the Sink that will be used.<br />
+				<strong>Destroy Wagons: </strong>Sets if the destruction of the
+				train will destroy the wagons coupled to it.
+			</p>
+			<h3>Move Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/MoveTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Move Train panel:</p>
+			<p>
+				<strong>Train: </strong>Sets the reference to the train to be
+				moved.<br />
+				<strong>Mandatory Rails: </strong>Sets rails that must be passed 
+				during the travel.<br />
+				<strong>Final Destiny: </strong>Sets the final destination to
+				the train. It can be a Rail, RailControlPoint, Station or Wagon.<br />
+				<strong>Wait Until Complete: </strong>Sets if the moving can be
+				preempted.<br />
+				<strong>Travel Offset: </strong> Sets the offset to be used when
+				moving the train.<br />
+				<strong>Relative to: </strong> Sets the train relative compartment to position when parking.
+			</p>
+			<h3>Move Wagon</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/MoveWagon.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Move Wagon panel:</p>
+			<p>
+				<strong>Wagon(s): </strong>Sets the reference to the wagon(s) to be
+				moved.<br />
+				<strong>Mandatory Rails: </strong>Sets rails that must be passed 
+				during the travel.<br />
+				<strong>Final Destiny: </strong>Sets the final destination to
+				the wagon(s). It can be a Rail, RailControlPoint (movement activities), Station or Locomotive/Wagon (couple and decouple activities).<br />
+				<strong>Wait Until Complete: </strong>Sets if the moving can be
+				preempted.<br />
+				<strong>Set Speed Table: </strong>Check to configure a new speed table.<br />
+				<strong>Customize Wagon Speeds: </strong>Sets the wagon(s) speed profile.<br />
+				<strong>Travel Offset: </strong> Sets the offset to be used when
+				moving the train.<br />
+				<strong>Assign To/Insert at front of: </strong>Sets where the Wagon(s)
+				 will be stored in the token.<br />
+				<strong>Remove from Label: </strong>Check to remove the moving wagon(s) 
+				from the previous wagon reference.
+			</p>
+			<h3>Create Wagon</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/CreateWagon.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Create Wagon panel:</p>
+			<p>
+				<strong>ControlPoint: </strong>Sets the reference to the
+				ControlPoint that will hold the wagon.<br />
+				<strong>Quantity: </strong>Sets the quantity to be created.<br />
+				<strong>Wagon/Car Type: </strong>Sets the type of Wagon that
+				will be created.<br />
+				<strong>Reverse Create: </strong>Sets if the creation of the
+				wagons will be reversed.<br />
+				<strong>Wagon Color: </strong>Sets the Wagon color.<br />
+				<strong>Assign To/Insert at front of: </strong>Sets where the Wagon(s) will be
+				stored in the token.<br />
+				<strong>Max Weight: </strong>Sets the max weight for the
+				Wagon(s).<br />
+				<strong>Current Weight: </strong>Sets the initial weight for the
+				Wagon(s).<br />
+				<strong>Assign labels to Created Objects: </strong>Assign labels to Wagon(s) 
+				during creation.
+			</p>
+			<h3>Couple Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/CoupleTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Couple Train panel:</p>
+			<p>
+				<strong>Locomotive: </strong>Sets the reference to the
+				Locomotive that will hold the Wagon(s).<br />
+				<strong>Train(s): </strong>Sets the reference to the
+				Wagon(s) or Locomotive.<br />
+				<strong>Couple Time: </strong>Sets the couple time.<br />
+				<strong>Assign To/Insert at front of: </strong>Sets where the composition
+				 will be stored in the token.
+			</p>
+			<h3>Decouple Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/DecoupleTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Decouple Train panel:</p>
+			<p>
+				<strong>Locomotive: </strong>Sets the reference to the
+				Locomotive that holds the Wagon(s)/Locomotive(s).<br />
+				<strong>Train(s): </strong>Sets the reference to the Wagon(s)/Locomotive(s).<br />
+				<strong>Quantity of Trains: </strong>Set the number of 
+				compartments that will be uncoupled. The 0 by default decouples all compartments.<br />
+				<strong>Assign To/Insert at front of: </strong>Sets where the compartments
+				 will be stored in the token.<br />
+				<strong>Remove from Label: </strong>Check to remove the compartments 
+				 from the previous train reference.<br />
+				<strong>ControlPoint: </strong>Sets the ControlPoint that will
+				receive the compartments.<br />
+				<strong>Decouple Time: </strong>Sets the decouple time.
+			</p>
+			<h3>Load Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/LoadTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Load Train panel:</p>
+			<p>
+				<strong>Control Point: </strong>Sets the ControlPoint that have
+				the load/unload operation.<br />
+				<strong>Train Reference: </strong>Sets the reference to the
+				Locomotive that holds the Wagon(s) that will be loaded/unloaded.
+				<br />
+				<strong>Keep Flowitem Object: </strong>Switches between keeping
+				the Flowitem or not in the action of loading. If this is
+				unchecked, the Flowitem will be destroyed and, in the Wagon,
+				will only exist as a numeric reference.<br />
+				<strong>Allow Fractionated Load: </strong>Switches between
+				allowing fractionated load or not. If checked, the Wagon can
+				load fractionated parts of the Flowitem, always filling up the
+				max weight.<br />
+				<strong>Load Type: </strong>Sets the type of load used by this
+				Activity, which can be: Full Loaded Release Only, Load Time
+				Constraint, Max Idle Timer and Specific Cargo Weight. 
+				<li> Selecting Full Loaded Release only will load the Locomotive 
+					until it is full, then it will release it.
+				</li> 
+				<li>
+					Selecting Load Time Constraint will load the
+				Locomotive based on some time constraint, then it will release
+				it. 
+				</li>
+				<li>
+					Selecting Max Idle Timer will load the Locomotive until the
+					specified max idle time, then it will release it.
+				</li>
+				<li>
+					Selecting Specific Cargo Weight will load the compartments the 
+					amount specified then it will release it, otherwise it will release 
+					after the specified max idle time.
+				</li><br />
+				<strong>Load Time: </strong>Sets the time to load the
+				Locomotive. This value is only used when the Load Type is set to
+				Load Time Constraint or Max Idle Timer. <br />
+				<strong>onFull Release Train: </strong> Sets if, when the
+				Locomotive is full, the train will be released early or not.
+				<br />
+				<strong>Mininum Load Time: </strong> Sets the minimum load time
+				to load the Locomotive. This value is only used when the Load
+				Type is set to Load Time Constraint or Max Idle Timer, and the
+				onFull Release Train is set to true. <br />
+				<strong>Maximum Idle Time: </strong>Sets the max idle time to
+				load the Locomotive. This value is only used when the Load Type
+				is set to Max Idle Timer. <br />
+				<strong>Cargo Weight: </strong>Sets the max weight to be loaded. 
+				This value is only used when the Load Type is set to Specific 
+				Cargo Weight.<br />
+				<strong>Load compartments: </strong>Check to specify what compartments 
+				will be loaded. <br />
+			</p>
+			<h3>Unload Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/UnloadTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Unload Train panel:</p>
+			<p>
+				<strong>Control Point: </strong>Sets the ControlPoint that have
+				the load/unload operation.<br />
+				<strong>Train Reference: </strong>Sets the reference to the
+				Locomotive that holds the Wagon(s) that will be loaded/unloaded. <br />
+				<strong>Allow Fractionated unload: </strong>Switches between
+				allowing fractionated unload or not. If checked, the compartment can
+				unload fractionated parts of the Flowitem, always filling up the
+				max weight.<br />
+				<strong>Unload Type: </strong>Sets the type of unload used by this
+				Activity, which can be: Full Unloaded Release Only, Unload Time
+				Constraint, Max Idle Timer and Specific Cargo Weight. 
+				<li> Selecting Full Unloaded Release only will unload the Locomotive 
+					until it is empty, then it will release it.
+				</li> 
+				<li>
+					Selecting Unload Time Constraint will unload the
+				Locomotive based on some time constraint, then it will release
+				it. 
+				</li>
+				<li>
+					Selecting Max Idle Timer will unload the Locomotive until the
+					specified max idle time, then it will release it.
+				</li>
+				<li>
+					Selecting Specific Cargo Weight will unload the compartments the 
+					amount specified then it will release it, otherwise it will release 
+					after the specified max idle time.
+				</li><br />
+				<strong>Unload Time: </strong>Sets the time to unload the
+				compartments. This value is only used when the Unload Type is set to
+				Unload Time Constraint or Max Idle Timer. <br />
+				<strong>onFull Release Train: </strong> Sets if, when the
+				compartments are empty, the train will be released early or not.
+				<br />
+				<strong>Mininum Unload Time: </strong> Sets the minimum unload time
+				to unload the compartments. This value is only used when the Unload
+				Type is set to Unload Time Constraint or Max Idle Timer, and the
+				onFull Release Train is set to true. <br />
+				<strong>Maximum Idle Time: </strong>Sets the max idle time to
+				unload the Locomotive. This value is only used when the Unload Type
+				is set to Max Idle Timer. <br />
+				<strong>Cargo Weight: </strong>Sets the max weight to be unloaded. 
+				This value is only used when the Unload Type is set to Specific 
+				Cargo Weight.<br />
+				<strong>Unload compartments: </strong>Check to specify what compartments 
+				will be unloaded. <br />
+			</p>
+			<h3>Fuel Train</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/FuelTrain.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Fuel Train panel:</p>
+			<p>
+				<strong>Control Point: </strong>Sets the ControlPoint that have
+				the fuel operation.<br />
+				<strong>Train Reference: </strong>Sets the reference to the
+				Locomotive that will be fueled. <br />
+				<strong>Fuel Time: </strong>Sets the time to fuel the
+				Locomotive.
+			</p>
+			<h3>Crane Load</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/CraneLoad.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Crane Load panel:</p>
+			<p>
+				<strong>Wagon: </strong>Sets the reference to the Wagon.<br />
+				<strong>Crane: </strong>Sets the reference to Crane.<br />
+				<strong>Item: </strong>Sets the reference to the item that will
+				be loaded by the Crane.
+			</p>
+			<h3>Crane Unload</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/CraneUnload.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Crane Unload panel:</p>
+			<p>
+				<strong>Wagon: </strong>Sets the reference to the Wagon.<br />
+				<strong>Crane: </strong>Sets the reference to Crane.<br />
+				<strong>Destination: </strong>Sets the reference to the
+				destination of unloading.
+			</p>
+			<h3>Send to Portal</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/SendToPortal.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Send To Portal panel:</p>
+			<p>
+				<strong>Train: </strong>Sets the reference to the leading locomotive of a composition.<br />
+				<strong>GISPortal: </strong>Sets the reference to the destiny GIS Portal where the composition will be sent to.<br />
+				<p>After sending the train composition to the GIS Portal, the default SendToPort configuration will determine wich GISPortal will be destiny.</p>
+			</p>
+			<h3>Assign HeadwayTag</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/AssignHeadwayTag.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Assign HeadwayTag panel:</p>
+			<p>
+				<strong>Train Reference: </strong>Sets the reference to the leading locomotive of a composition.<br />
+				<strong>Headway Tag: </strong>Sets the tag to which the headway system will look for.<br />
+				<strong>Train Tag Value: </strong>Sets the name for the train which will be shown on the headway outputs.<br />
+			</p>
+			<h3>Get Compartments</h3>
+			<img
+				class="image-gui"
+				alt="Rail Object"
+				src="Images/processflow/ui/GetCompartments.png"
+				class="autoresize framed"
+			/>
+			<p>The following properties are on the Get Compartments panel:</p>
+			<p>
+				<strong>Object: </strong>Sets the object to get parked locomotives 
+				and wagons when the object is Rail or RailControlPoint; or 
+				gets composition when the object is Locomotive or Wagon.<br />
+				<strong>Assign To/Insert at front of: </strong>Sets where the compartment(s)
+				 will be stored in the token.<br />
+			</p>
+		</section>
+	</body>
+</html>

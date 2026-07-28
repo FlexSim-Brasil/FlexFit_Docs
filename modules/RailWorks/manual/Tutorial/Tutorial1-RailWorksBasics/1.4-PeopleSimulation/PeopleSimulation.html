@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tutorial Exercise 1.4</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../../../../CSS/prism.css" />
+		<script src="../../../../../../CSS/prism.js"></script>
+    <style>
+        /* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+        nav li>ul {
+            margin-bottom: 0px !important;
+        }
+
+        img.inline {
+            display: inline;
+            vertical-align: middle;
+            max-height: 1em;
+            margin: 0;
+            margin-right: 0px;
+        }
+
+        /* For the product table color preview: */
+        .preview-color {
+            display: block;
+            border: solid 1px;
+            width: 50px;
+            height: 20px;
+        }
+
+        .tutorial-image {
+            width: 75%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-pf-gui {
+            width: 40%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-video {
+            width: 100%;
+            border: 1px solid grey;
+        }
+
+        kbd {
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+            color: #333;
+            display: inline-block;
+            font-size: .85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body style="text-align: justify">
+    <header>
+        <h1>Tutorial Exercise 1.4</h1>
+        <nav>
+            <ul>
+                <li><a href="#exercise">Exercise Information</a></li>
+                <li><a href="#create">Creating objects</a></li>
+                <li><a href="#processflow">Processflow Configuration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="exercise">
+        <h2>Exercise Information</h2>
+        <p>
+            A station receives a passenger every 10 seconds. This passenger checks
+            in for 10 seconds and waits in line to get on the next subway. The
+            subway arrives every 1000 seconds, wait for 60 seconds at the station
+            and has a capacity of 40 passengers per trip. The destination is 1 kilometer 
+            away and, when passengers arrive, they have to check out, which lasts 10 seconds. 
+            The Stations have a capacity of 40 passengers and is interesting to know the number
+            of passengers waiting outside de initial station, as well as the number
+            of passengers that arrived at the destination.
+        </p>
+    </section>
+    <section id="create">
+        <h2><span>Step 1</span> Creating objects</h2>
+        <p>
+            In order to achieve the solution for the problem, you should create the
+            following objects:
+        </p>
+        <ul>
+            <li>Create one SourceTrain.</li>
+            <li>Create four Rails.</li>
+            <li>
+                Connect SourceTrain to the Rail1 (using the <kbd>A</kbd> key) and then connect
+                Rail1 to Rail2, Rail2 to Rail3 and Rail3 to Rail4 via proximity.
+            </li>
+            <li>
+                On the Rail3, set "Virtual Distance" to true and set the value to 1000,
+                meaning 1000 meters or 1 kilometer.
+            </li>
+            <li>
+                Create two RailControlPoints and put one on Rail2 and one on Rail4.
+                The RailControlPoints should change color if they are connected
+                correctly to the Rails. We recommend the creation of the
+                RailControlPoints in a empty space and, after that, you can place it on the Rails.
+            </li>
+            <li>
+                Create two Stations using the Passenger Station model and connect the
+                central port of each one to a RailControlPoint (using the <kbd>S</kbd> key).
+            </li>
+            <li>
+                On both Stations, set "Max Weight" to 40, "Units Per FlowItem" to 1 and
+                "FlowItem Class" to Man.
+            </li>
+            <li>
+                Create one Queue and connect it to the Station on Rail2 (using the <kbd>A</kbd> key). On
+                Statistics, in the properties menu, pin the Content > Line Chart on a New
+                Dashboard to know the number of passengers waiting outside the initial
+                station.
+            </li>
+            <li>Create one Processor and connect it to the Queue (using the <kbd>A</kbd> key).</li>
+            <li>
+                Create one Source and connect it to the Processor (using the <kbd>A</kbd> key), set its
+                "Inter-Arrivaltime" to 10 and the "FlowItem Class" to Man.
+            </li>
+            <li>Create one Processor and connect the Station on Rail4 to it (using the <kbd>A</kbd> key).</li>
+            <li>
+                Create a Sink and connect the final Processor to it (using the <kbd>A</kbd> key). On Statistics, in
+                the properties menu, pin the "Throughput" on the Dashboard already
+                created to know the total number of passengers that arrived.
+            </li>
+            <li>Create a Sink and put it next to Rail4, no need to connect it.</li>
+        </ul>
+        <p>
+            <img class="tutorial-video" alt="Exercise4" src="Images/configurationModel.gif" class="autoresize framed" />
+        </p>
+        <p>Your model should be looking like this.</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise4Objs" src="Images/Exercise4Objs.png"
+                class="autoresize framed" /><br />
+        </p>
+    </section>
+
+    <section id="processflow">
+        <h2><span>Step 2</span> Processflow Configuration</h2>
+        <p>
+            In order to achieve the solution for the problem, you should create the
+            following processflow tasks:
+        </p>
+        <ul>
+            <li>Create a Inter-Arrival Source.</li>
+            <li>Create a "CreateTrain" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "LoadWagon" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "UnloadWagon" activity.</li>
+            <li>Create a "DestroyTrain" activity.</li>
+            <li>Create a Sink.</li>
+        </ul>
+        <p>Your processflow should be looking like this:</p>
+        <p>
+            <img class="tutorial-pf-gui" alt="Exercise4PF" src="Images/Exercise4PF.png"
+                class="autoresize framed" /><br />
+        </p>
+
+        <p>To configure your processflow tasks follow the steps:</p>
+        <ul>
+            <li>On Source, set the "Inter-Arrivaltime" to 1000.</li>
+            <li>
+                On "CreateTrain" activity, points the "Source Train" reference to your SourceTrain.
+                Set "Max Weight" to 40 and the "Locomotive Type" to Passenger.
+            </li>
+            <li>
+                On "MoveTrain" activity, set train reference to "token.train" and destiny to the
+                RailControlPoint on Rail2.
+            </li>
+            <li>
+                On "LoadWagon" activity, set train reference to "token.train", "Control Point"
+                reference to the RailControlPoint on Rail2 and "Load Type" to "Load Time Constraint".
+            </li>
+            <li>
+                On the second "MoveTrain" activity, set train reference to "token.train" and destiny to
+                the RailControlPoint on Rail4.
+            </li>
+            <li>
+                On "UnloadWagon" activity, set train reference to "token.train" and "Control Point"
+                reference to the RailControlPoint on Rail4.
+            </li>
+            <li>
+                On "DestroyTrain" activity, set train reference to "token.train" and "Sink" reference
+                to the Sink next to Rail4.
+            </li>
+        </ul>
+        
+        <p>With this configuration your model is ready.</p>
+    </section>
+</body>
+
+</html>

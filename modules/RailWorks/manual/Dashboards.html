@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RailWorks Dashboards</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../CSS/prism.css" />
+		<script src="../../../CSS/prism.js"></script>
+    <style>
+        /* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+        nav li>ul {
+            margin-bottom: 0px !important;
+        }
+
+        img.inline {
+            display: inline;
+            vertical-align: middle;
+            max-height: 1em;
+            margin: 0;
+            margin-right: 0px;
+        }
+
+        /* For the product table color preview: */
+        .preview-color {
+            display: block;
+            border: solid 1px;
+            width: 50px;
+            height: 20px;
+        }
+
+        #cssTable td {
+            vertical-align: middle;
+            text-align: justify;
+        }
+
+        #cssTable p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .image-object {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .image-object-large,
+        .image-gui {
+            width: 75%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .image-gui {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body style="text-align: justify">
+    <header>
+        <h1>RailWorks Dashboards</h1>
+        <nav>
+            <ul>
+                <li><a href="#intro">RailWorks Dashboards</a></li>
+                <li><a href="#customdashboards">Custom Dashboards</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="intro">
+        <h2>RailWorks Dashboards</h2>
+        <p>
+            RailWorks comes with five custom Dashboards to get data from the
+            model and display it in a more easily visual way. The current Dashboards
+            that are in the module are:
+        <ul>
+            <li>Station Content</li>
+            <li>AVG Train Staytime On Station</li>
+            <li>Railway Staytime</li>
+            <li>Train Occupation On Station</li>
+            <li>Train Speed VS Time</li>
+        </ul>
+        </p>
+    </section>
+
+    <section id="customdashboards">
+        <h2>Custom Dashboards</h2>
+        <p>
+            This section shows all the Dashboards that RailWorks
+            come with, populated with data to help visualize the purpose with which one.
+        </p>
+
+        
+        <h3>Station Content</h3>
+        <img class="image-object-large" alt="Dashboard" src="Images/dashboards/StationContent.png"
+            class="autoresize framed" />
+        <p></p><b>Target Object: </b>Station<p></p>
+        <p>
+            This dashboard shows the current content value of the Station by the model runtime.
+        </p>
+
+        <h3>AVG Train Staytime On Station</h3>
+        <img class="image-object-large" alt="Dashboard" src="Images/dashboards/AVGTrainStaytimeOnStation.png"
+            class="autoresize framed" />
+        <p></p><b>Target Object: </b>Station<p></p>
+        <p>
+            This dashboard shows the average time spent by locomotives inside rails connected
+            to the Station.
+        </p>
+        <h3>Railway Staytime</h3>
+        <img class="image-object-large" alt="Dashboard" src="Images/dashboards/RailwayStaytime.png"
+            class="autoresize framed" />
+        <p></p><b>Target Object: </b>Rail<p></p>
+        <p>
+            This dashboard shows the time spent by each Locomotive on the selected Rail.
+        </p>
+
+        <h3>Train Occupation On Station</h3>
+        <img class="image-object-large" alt="Dashboard" src="Images/dashboards/trainOccupationOnStation.png"
+            class="autoresize framed" />
+        <p></p><b>Target Object: </b>Station<p></p>
+        <p>
+            This dashboard shows the amount of Locomotives parked at the selected Station by the
+            model runtime.
+        </p>
+        <h3>Train Speed VS Time</h3>
+        <img class="image-object-large" alt="Dashboard" src="Images/dashboards/trainSpeedVSTime.png"
+            class="autoresize framed" />
+        <p></p><b>Target Object: </b>Rails<p></p>
+        <p>
+            This dashboard shows each locomotive's speed by the time that they pass through each
+            selected Rail object.
+        </p>
+    </section>
+</body>
+
+</html>

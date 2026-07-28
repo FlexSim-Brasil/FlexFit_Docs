@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tutorial Exercise 1.2</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="../../../../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../../../../CSS/prism.css" />
+		<script src="../../../../../../CSS/prism.js"></script>
+		<style>
+			/* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+			nav li > ul {
+				margin-bottom: 0px !important;
+			}
+
+			img.inline {
+				display: inline;
+				vertical-align: middle;
+				max-height: 1em;
+				margin: 0;
+				margin-right: 0px;
+			}
+
+			/* For the product table color preview: */
+			.preview-color {
+				display: block;
+				border: solid 1px;
+				width: 50px;
+				height: 20px;
+			}
+
+			.tutorial-image {
+				width: 75%;
+				object-fit: cover;
+				border: 1px solid grey;
+			}
+
+			.tutorial-pf-gui {
+				width: 40%;
+				object-fit: cover;
+				border: 1px solid grey;
+			}
+
+			.tutorial-video {
+				width: 100%;
+				border: 1px solid grey;
+			}
+
+			kbd {
+				background-color: #eee;
+				border-radius: 3px;
+				border: 1px solid #b4b4b4;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+					0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+				color: #333;
+				display: inline-block;
+				font-size: 0.85em;
+				font-weight: 700;
+				line-height: 1;
+				padding: 2px 4px;
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+
+	<body style="text-align: justify">
+		<header>
+			<h1>Tutorial Exercise 1.2</h1>
+			<nav>
+				<ul>
+					<li><a href="#exercise">Exercise Information</a></li>
+					<li><a href="#create">Creating objects</a></li>
+					<li>
+						<a href="#processflow">Processflow Configuration</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<section id="exercise">
+			<h2>Exercise Information</h2>
+			<p>
+				Five tonnes of material must be transported from one station to
+				another, a locomotive must travel from the empty station to the
+				loaded one, going through a 300 meters rail. The locomotive can
+				carry 500 kilograms on each trip, going at a velocity of 10 m/s,
+				both coupled and uncoupled.
+			</p>
+		</section>
+		<section id="create">
+			<h2><span>Step 1</span> Creating objects</h2>
+			<p>
+				In order to achieve the solution for the problem, you should
+				create the following objects:
+			</p>
+			<ul>
+				<li>Create one "SourceTrain".</li>
+				<li>
+					Create four Rails, then resize Rail3 xvalue to 300. Connect
+					SourceTrain to the Rail2 (using the <kbd>A</kbd> key) and
+					then connect Rail1 to Rail2, Rail2 to Rail3, Rail3 to Rail4 via
+					proximity.
+				</li>
+				<li>
+					Create three RailControlPoint and place one on Rail1, Rail2 and the
+					other one on Rail4. The RailControlPoints should change
+					color if they are connected correctly to the Rails. We
+					recommend the creation of the RailControlPoints in a empty
+					space and, after that, you can place it on the Rails.
+				</li>
+				<li>
+					Create two Stations, then connect its center port (using the
+					<kbd>S</kbd> key) to the RailControlPoint on Rail2 and the
+					other station to RailControlPoint on Rail4.
+				</li>
+				<li>
+					On the initial Station, set the "Max Weight" to 5000 (5
+					tonnes) and, on the other one, set "Start Weight" and "Max
+					Weight" to 5000 (5 tonnes).
+				</li>
+			</ul>
+			<p>
+				<img
+					class="tutorial-image"
+					alt="Exercise2Connections"
+					src="Images/Exercise2Connections1.png"
+					class="autoresize framed"
+				/><br />
+			</p>
+			
+			<p>
+				<img
+					class="tutorial-image"
+					alt="Exercise2Objs"
+					src="Images/Exercise2Connections2.png"
+					class="autoresize framed"
+				/><br />
+			</p>
+			
+			<p>
+				<img
+					class="tutorial-image"
+					alt="Exercise2Params"
+					src="Images/Exercise2params.png"
+					class="autoresize framed"
+				/><br />
+			</p>
+			
+			<p>Your model should be looking like this:</p>
+			<p>
+				<img
+					class="tutorial-image"
+					alt="Exercise2Objs"
+					src="Images/Exercise2Objs.png"
+					class="autoresize framed"
+				/><br />
+			</p>
+		</section>
+		<section id="processflow">
+			<h2><span>Step 2</span> Processflow Configuration</h2>
+			<p>
+				In order to achieve the solution for the problem, you should
+				create the following processflow tasks:
+			</p>
+			<ul>
+				<li>Create a Schedule Source.</li>
+				<li>Create a "CreateTrain" activity.</li>
+				<li>Create a "CreateWagon" activity.</li>
+				<li>Create a "MoveTrain" activity.</li>
+				<li>Create a "CoupleWagon" activity.</li>
+				<li>Create a "MoveTrain" activity.</li>
+				<li>Create a "LoadWagon" activity.</li>
+				<li>Create a "MoveTrain" activity.</li>
+				<li>Create a "UnloadWagon" activity.</li>
+				<li>Create a "Decide" activity.</li>
+				<li>Create a Sink.</li>
+			</ul>
+			<p>Your processflow should be looking like this:</p>
+			<p>
+				<img
+					class="tutorial-pf-gui"
+					alt="Exercise2PF"
+					src="Images/Exercise2PF.png"
+					class="autoresize framed"
+				/><br />
+			</p>
+
+			<p>To configure your processflow tasks follow the steps:</p>
+			<ul>
+				<li>
+					On "CreateTrain" activity, point the "Source Train" reference to your
+					SourceTrain, set both the "Locomotive Uncoupled" and the
+					"Locomotive Coupled" to the value 10 and the "Max Weight" to
+					500.
+				</li>
+				<li>On "CreateWagon" activity, point the "Control Point" reference to the
+					RailControlPoint on Rail1, set wagons quantity to 1 and check "Reverse Create".
+				</li>
+				<li>
+					On the first "MoveTrain" activity, set train reference to "token.train" and destiny
+					to the label "token.wagon" on Rail1.
+				</li>
+				<li>
+					On "CoupleWagon" activity, set train reference to "token.train" and wagon
+					reference to "token.wagon".
+				</li>
+				<li>
+					On the second "MoveTrain" activity of the block, set train reference to
+					"token.train" and destiny to the RailControlPoint on Rail4.
+				</li>
+				<li>
+					On "LoadWagon" activity, set train reference to "token.train" and
+					"Control Point" reference to the RailControlPoint on Rail4.
+					Leave the "Load Type" on "Full Loaded Release Only".
+				</li>
+				<li>
+					On the third "MoveTrain" activity of the block, set train reference to
+					"token.train" and destiny to the RailControlPoint on Rail2.
+				</li>
+				<li>
+					On "UnloadWagon" activity, set train reference to "token.train" and
+					"Control Point" reference to the RailControlPoint1 on Rail2.
+				</li>
+				<li>
+					On the "Decide" activity, set a conditional decide with the value
+					"getvarnode(Model.find("Silo2"), "currentWeight").value ==
+					0", where "Silo2" is the name of the loaded station and can
+					be different depending on the order of creation of the
+					objects. The connector 1 should be the Sink and the
+					connector 2, the block that loads and unloads the train.
+				</li>
+			</ul>
+			<p>With this configuration your model is ready.</p>
+		</section>
+	</body>
+</html>

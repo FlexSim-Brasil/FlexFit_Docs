@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tutorial Exercise 2.2</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../../../../CSS/prism.css" />
+		<script src="../../../../../../CSS/prism.js"></script>
+    <style>
+        /* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+        nav li>ul {
+            margin-bottom: 0px !important;
+        }
+
+        img.inline {
+            display: inline;
+            vertical-align: middle;
+            max-height: 1em;
+            margin: 0;
+            margin-right: 0px;
+        }
+
+        /* For the product table color preview: */
+        .preview-color {
+            display: block;
+            border: solid 1px;
+            width: 50px;
+            height: 20px;
+        }
+
+        .tutorial-image {
+            width: 75%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-pf-gui {
+            width: 40%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-video {
+            width: 100%;
+            border: 1px solid grey;
+        }
+
+        kbd {
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+            color: #333;
+            display: inline-block;
+            font-size: .85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body style="text-align: justify">
+    <header>
+        <h1>Tutorial Exercise 2.2</h1>
+        <nav>
+            <ul>
+                <li><a href="#exercise">Exercise Information</a></li>
+                <li><a href="#create">Creating objects</a></li>
+                <li><a href="#processflow">Processflow Configuration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="exercise">
+        <h2>Exercise Information</h2>
+        <p>
+            A passenger train, with the capacity to transport 40 people, travels through a 
+            simple railway. In the map, the train goes from point A, where it collects passengers, 
+            through point B for a quick stop, all the way to point C, where the passengers 
+            are left. Passengers wait at the Station in point A, and leave in a line after 
+            the Station in point C. Four trains go through the path each day, in intervals of 3 hours. 
+            They start their schedule at 6 a.m. and finish it at 6 p.m.
+        </p>
+    </section>
+    <section id="create">
+        <h2><span>Step 1</span> Creating objects</h2>
+        <p>
+            In order to achieve the solution for the problem, you should create the
+            following objects:
+        </p>
+        <ul>
+            <li>Create one SourceTrain.</li>
+            <li>Create two Rails.</li>
+            <li>
+                Connect SourceTrain to the Rail1 (using the <kbd>A</kbd> key) and then connect
+                Rail1 to Rail2 via proximity.
+            </li>
+            <li>
+                Create one RailControlPoint and put it on Rail2. The RailControlPoints should change 
+                color if they are connected correctly to the Rails. We recommend the creation of the
+                RailControlPoints in a empty space and, after that, you can place it on the Rails.
+            </li>
+            <li>
+                Create a Station using the Passenger Station model and connect the
+                central port to the RailControlPoint (using the <kbd>S</kbd> key).
+            </li>
+            <li>
+                On the Station, set "Max Weight" to 40, "Units Per FlowItem" to 1 and
+                "FlowItem Class" to Man.
+            </li>
+            <li>
+                Create one Queue and connect it to the Station (using the <kbd>A</kbd> key).
+            </li>
+            <li>
+                Create one Source and connect it to the Queue (using the <kbd>A</kbd> key), 
+                set the "Arrival Style" to Arrival Schedule. Check "Repeat table" and click 
+                on "Edit Table". On table, increase "Arrivals" to 2 and set for Arrival1 time 0 
+                and quantity 40, for Arrival2, time 10799 and quantity 0. Set the "FlowItem Class" 
+                to Man.
+            </li>
+            <li>
+                Create the GISMap, and create three points in it using the GisMap library. Connect 
+                the three points to form the path, select the type of road to Railways.
+            </li>
+            <li>
+                Create a GISportal and connect it to the initial point in GISMap (using the <kbd>A</kbd> key).
+            </li>
+
+            <li>
+                Create another GISPortal and connect it to point B in GISMap (using the <kbd>A</kbd> key).
+                Connect the GISPortal1 to GISPortal2 as well.
+            </li>
+
+            <li>Create two more Rails.</li>
+            <li>
+                Connect the GISPortal2 to the first Rail of the second path (using the <kbd>A</kbd> key) 
+                and then connect Rail3 to Rail4 via proximity.
+            </li>
+
+            <li>
+                Create one more RailControlPoint and put one on Rail4. Create another Station using the 
+                Passenger Station model and connect the central port to the RailControlPoint (using 
+                the <kbd>S</kbd> key).
+            </li>
+            <li>
+                Repeat the steps of creating the GISPortal3 and GISPortal4, connecting them to points B and C, 
+                then creating another two Rails and connecting GISPortal4 to it. It is important to 
+                connect the GISPortal3 and GISPortal4 amongst each other as well.
+            </li>
+            <li>
+                Repeat the steps of creating a Passegenger Station and a RailControlPoint to Rail6 and connecting 
+                them through a central port.
+            </li>
+            <li>
+                Create a Sink and position it at the end of Rail6.
+            </li>
+
+            <li>
+                Finally, create a Queue and connect the Station to it, set it to stack flowitems in 
+                a horizontal line. 
+            </li>
+            <li>
+                Create a Processor and a Sink, set the process time to 5 seconds. Lastly, connect the Queue 
+                to the Processor, and the Processor to the Sink.
+            </li>
+
+        </ul>
+        <p>
+            <img class="tutorial-video" alt="Exercise6" src="Images/configurationModel.gif" class="autoresize framed" />
+        </p>
+        <p>Your model should be looking like this:</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise6Objs" src="Images/Exercise6Objs.png"
+                class="autoresize framed" /><br />
+        </p>
+    </section>
+
+    <section id="processflow">
+        <h2><span>Step 2</span> Processflow Configuration</h2>
+        <p>
+            In order to achieve the solution for the problem, you should create the
+            following processflow tasks:
+        </p>
+        <ul>
+            <li>Create an Inter-Arrival Source.</li>
+            <li>Create a "CreateTrain" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "LoadWagon" activity.</li>
+            <li>Create a "SendToPortal" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "SendToPortal" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create an "UnloadWagon" activity.</li>
+            <li>Create a "DestroyTrain" activity.</li>
+            <li>Create a Sink.</li>
+        </ul>
+        <p>Your processflow should be looking like this:</p>
+        <p>
+            <img class="tutorial-pf-gui" alt="Exercise6PF" src="Images/Exercise6PF.png"
+                class="autoresize framed" /><br />
+        </p>
+
+        <p>To configure your processflow tasks follow the steps:</p>
+        <ul>
+            <li>On source, set the "Inter-Arrivaltime" to 10800.</li>
+            <li>
+                On "CreateTrain" activity, point the "Source Train" reference to your SourceTrain.
+                Set "Max Weight" to 40 and the "Locomotive Type" to Passenger.
+            </li>
+            <li>
+                On "MoveTrain" activity, set train reference to "token.train" and destiny to the
+                RailControlPoint on Rail2.
+            </li>
+            <li>
+                On "LoadWagon" activity, set train reference to "token.train", "Control Point"
+                reference to the RailControlPoint on Rail3 and "Load Type" to a "Load Time Constraint"
+                of 60 seconds.
+            </li>
+            <li>
+                On "SendToPortal" activity, set the portal reference to the GISPortal1.
+            </li>
+            <li>
+                On the second "MoveTrain" activity, set train reference to "token.train" and destiny to
+                the RailControlPoint on Rail4.
+            </li>
+            <li>
+                On the second "SendToPortal" activity, set the portal reference to the GISPortal3.
+            </li>
+            <li>
+                On the third "MoveTrain" activity, set train reference to "token.train" and destiny to
+                the RailControlPoint on Rail6.
+            </li>
+            <li>
+                On "UnloadWagon" activity, set train reference to "token.train" and "Control Point"
+                reference to the RailControlPoint on Rail6.
+            </li>
+            <li>
+                On "DestroyTrain" activity, set train reference to "token.train" and "Sink" reference
+                to the Sink next to Rail6.
+            </li>
+        </ul>
+        <p>
+            <li>
+                Lastly, configure your simulation time to start at 6a.m. and end at 6p.m.
+            </li>
+        </p>
+        <p>
+            <img class="tutorial-stoptime" alt="Exercise6PF" src="Images/Exercise6ST.png" class="autoresize framed" />
+        </p>
+        
+        <p>With this configuration your model is ready.</p>
+    </section>
+</body>
+
+</html>

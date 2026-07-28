@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tutorial Exercise 4.1</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../../../../CSS/prism.css" />
+		<script src="../../../../../../CSS/prism.js"></script>
+    <style>
+        /* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+        nav li>ul {
+            margin-bottom: 0px !important;
+        }
+
+        img.inline {
+            display: inline;
+            vertical-align: middle;
+            max-height: 1em;
+            margin: 0;
+            margin-right: 0px;
+        }
+
+        /* For the product table color preview: */
+        .preview-color {
+            display: block;
+            border: solid 1px;
+            width: 50px;
+            height: 20px;
+        }
+
+        .tutorial-image {
+            width: 75%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-pf-gui {
+            width: 40%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-video {
+            width: 100%;
+            border: 1px solid grey;
+        }
+
+        kbd {
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+            color: #333;
+            display: inline-block;
+            font-size: .85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body style="text-align: justify">
+    <header>
+        <h1>Tutorial Exercise 4.1</h1>
+        <nav>
+            <ul>
+                <li><a href="#exercise">Exercise Information</a></li>
+                <li><a href="#signal">Signal Settings</a></li>
+                <li><a href="#create">Creating objects</a></li>
+                <li><a href="#processflow">Processflow Configuration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="exercise">
+        <h2>Exercise Information</h2>
+        <p>
+            A signalized rail track has a signal interval of 200m until it reaches a 50m lenght signalized
+			rail that access a passenger station. The time interval between trains is 80s and they spend
+			120s at the station to execute all the passengers board/unboard operations. The Signalized Rails
+			follow the 3 aspect signal type, formed by red, yellow and green light. When the train faces a yellow light
+			it must reduce its speed to 30% of the maximum allowed on track. After reaching the end of signalized
+			track, the trains must be moved to a sink.
+        </p>
+    </section>
+	<section id="signal">
+        <h2><span>Step 1</span> Signal Settings</h2>
+        <p>
+            The first step to use the Rail Signal System is to configure the settings and define the
+			Signal Aspects settings and the default aspect that the rails will assume when created.
+			<br>
+			<br>
+			To access the signal settings, follow the steps:
+        </p>
+		<ul>
+            <li>Drag one Signalized Rail to the model.</li>
+            <li>Access the RailSystem properties and click on the "Signal Settings" button and select 
+                the "3 aspects" aspect type.</li>
+            <li>Check the checkbox "Default Signal Aspect", so all the next Signalized Rails created 
+                on the model will follow this Signal Aspect.</li>
+            <li>Change the Aspect Max Speed of the yellow aspect to 30.</li>
+			<li>Press OK to apply the signal settings change and close the GUI.</li>
+			<li>Change the previously created SignalizedRail aspect to "3 Aspects" at the Signalized Rail properties.</li>
+		</ul>
+		
+		<p>
+				<img
+					class="tutorial-image"
+					alt="SignalSettings"
+					src="Images/signalSettingsGUI.png"
+					class="autoresize framed"
+				/><br />
+		</p>
+		
+		
+			
+    </section>
+    <section id="create">
+        <h2><span>Step 2</span> Creating objects</h2>
+        <p>
+            In order to achieve the solution for the problem, you should create the
+            following objects:
+        </p>
+        <ul>
+            <li>Create one SourceTrain.</li>
+            <li>Create another SignalizedRail.</li>
+            <li>
+                Connect SourceTrain to the SignalizedRail1 (using the <kbd>A</kbd> key) and then connect
+                SignalizedRail1 to SignalizedRail2 via proximity.
+            </li>
+			<li>Set a virtual distance to both SignalizedRails of 200 meters.</li>
+			<li>Create another SignalizedRail and resize it to 50 meters length (X).</li>
+			<li>Connect the SignalizedRail3 to SignalizedRail2 via proximity.</li>
+			<li>Create a RailControlPoint and place it near the end of the SignalizedRail3.</li>
+			<li>
+				Create a passenger station near SignalizedRail3 and connect the
+                central port to the RailControlPoint (using the <kbd>S</kbd> key).
+			</li>
+			<li>Create another SignalizedRail and connect it to SignalizedRail3 via proximity.</li>
+			<li>At the end of the track, create a normal Rail, connect it to SignalizedRail4 via proximity.</li>
+			<li>Place a sink near Rail5, no connections needed.</li>
+			
+		</ul>
+        <p>Your model should be looking like this:</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise9Objs" src="Images/Exercise9Objs.png"
+                class="autoresize framed" /><br />
+        </p>
+    </section>
+
+    <section id="processflow">
+        <h2><span>Step 3</span> Processflow Configuration</h2>
+        <p>
+            In order to achieve the solution for the problem, you should create the
+            following processflow tasks:
+        </p>
+        <ul>
+            <li>Create a Schedule Source.</li>
+            <li>Create a "CreateTrain" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "Delay" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "DestroyTrain" activity.</li>
+            <li>Create a Sink.</li>
+        </ul>
+        <p>Your processflow should be looking like this:</p>
+        <p>
+            <img class="tutorial-pf-gui" alt="Exercise9PF" src="Images/Exercise9PF.png"
+                class="autoresize framed" /><br />
+        </p>
+
+        <p>To configure your processflow tasks follow the steps:</p>
+        <ul>
+            <li>On Source, check the checkbox "Repeat Schedule" and configure 2 arrivals. The first
+			arrival will occur at time 0 with quantity 1, and at the second arrival set the time to 90 and
+			the quantity to 0. This way, 1 train will arrive every 80 seconds at the model.</li>
+            <li>
+                On "CreateTrain" activity, point the "Source Train" reference to your SourceTrain.
+                Set the "Locomotive Type" to Passenger and set the train color of your preference.
+            </li>
+            <li>
+                On "MoveTrain" activity, set train reference to "token.train" and destiny to the
+                RailControlPoint on SignalizedRail3.
+            </li>
+            <li>
+                On "Delay" activity, set the Delay Time to 120 seconds, this will represent all the load/unload
+				operations at the station.
+            </li>
+            <li>
+                On the second "MoveTrain" activity, set train reference to "token.train" and destiny to
+                the last rail, Rail5.
+            </li>
+            <li>
+                On "DestroyTrain" activity, set train reference to "token.train" and "Sink" reference
+                to the Sink next to Rail5.
+            </li>
+        </ul>
+        <p>
+            <li>
+                Lastly, configure your simulation time to start at 8a.m. and end at 8p.m.
+            </li>
+        </p>
+        <p>
+            <img class="tutorial-stoptime" alt="Exercise9ST" src="Images/Exercise9ST.png" class="autoresize framed" />
+        </p>
+        
+        <p>With this configuration your model is ready.</p>
+    </section>
+</body>
+
+</html>

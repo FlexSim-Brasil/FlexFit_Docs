@@ -1,0 +1,540 @@
+/* ========== Text Styles ========== */
+
+/* 
+Table of Contents
+    1. General Styles
+	2. Headings
+	3. Header and Nav (for Internal Table of Contents)
+	4. Asides (Important Notes and Side Notes)
+	5. Tables
+	6. Images
+	7. Lists
+	8. Tutorials
+
+--------------------------------------- */
+
+
+/* 1. General Styles
+--------------------------------------- */
+
+body {
+	font-size: 16px;
+	font-family: Verdana, Arial, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+	margin: 0 40px 0 40px;
+	line-height: 26px;
+	padding: 0 0 60px 0;
+}
+a {
+	text-decoration: inherit;
+	font-style: inherit;
+	color: inherit;
+}
+a:link, a:visited {
+	border: none;
+	text-decoration: underline;
+	font-style: normal;
+	color: #000;
+}
+p {
+	margin: 0 0 25px 0;
+}
+strong {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+}
+strong.property {
+	/* Just styled like a normal strong for now, but this can be changed */
+}
+section {
+	/* NOTE: If you change this max-width, you should also change it for the header tag in section 3
+	FYI, the technical writer strongly feels we should have a default width of 600px at minimum */
+	max-width: 700px;
+	/* to center the content in the middle of the page:
+	margin: 0 auto; */
+}
+code {
+	font-family: 'Courier New';
+	font-size: 16px;
+}
+
+/* 2. Headings
+--------------------------------------- */
+
+h1 {
+	color: #0d0d0d;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 160%;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	position: relative;
+	clear: both;
+	background-color: #fff;
+	color:#0d0d0d;
+	margin: 0 0 0 0px;
+	padding: 30px 0px 50px 0;
+	line-height: 300%px;
+}
+header>h1 {
+	padding-left: 40px;
+}
+header>h1:before {
+	content: " ";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 4px;
+	border-top: 8px solid #1a1a1a;
+	background-color: #a8a8a8;
+	top: 0px;
+	right: 0px;
+}
+h2 { 
+	color: #0d0d0d;
+	font-weight: bold;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 125%;
+	letter-spacing: 2px;
+	margin: 60px 0px 10px 0px;
+	border-bottom: 1px solid #0d0d0d;
+}
+/* h2 spans are used in tutorial topics to create the arrow effect */
+h2 span {
+	color: #ffffff;
+	text-transform: uppercase;
+	background-color: #1a1a1a;
+	padding: 5px 10px 5px 10px;
+	margin: 0 10px 10px 0;
+	position: relative;
+	display: inline-block; 
+	height: 32px;
+	box-sizing: border-box;
+	line-height: 23px;
+}
+h2 span:after {
+	display: block;
+	content: "";
+	background: url(Images/Tutorial.png) no-repeat;
+	width: 27px;
+	height: 32px;
+	position: absolute;
+	top: 0px;
+	right: -17px;
+}
+h3 {
+	color: #0d0d0d;
+	font-weight: bold;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 110%;
+	letter-spacing: 1.5px;
+	margin: 40px 0px 10px 0px;
+}
+h3.property {
+	/* Just styled like a normal h3 for now, but this can be changed
+	See also: strong.property
+	*/
+}
+/* 	You shouldn't go any deeper than h3 in your topics as a general rule!
+
+	FYI, h4 is used in the aside element for important notes and tips
+	See section 4 (Asides) below for more information */
+
+
+
+/* 3. Header and Nav (for Internal Table of Contents)
+--------------------------------------- */
+
+header {
+	background-color: #fff;
+	margin: 0px -40px 10px -40px;
+	/* to center in page 
+	margin: 0 auto; */
+}
+nav:before {
+	content: "Contents";
+	font-weight: bold;
+	text-transform: uppercase;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11pt;
+	color: #fff;
+	margin-left: 2px;
+}
+nav {
+	background-color: #1a1a1a;
+	border: 1px solid #1a1a1a;
+	border-left: 0px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11pt;
+	/* Never let the width go beyond 430px, which is the default width of the User Manual */
+	width: 400px;
+	padding: 30px 40px 20px 40px;
+	border-radius: 0px 55px 55px 0px;
+}
+nav ul {
+	list-style-type: none;
+	margin: 0 0 10px 0;
+}
+nav ul li {
+	margin-left: -5px;
+}
+nav a:link, nav a:visited {
+	border: none;
+	text-decoration: none;
+	font-style: normal;
+	color: #fff;
+}
+nav a:hover {
+	text-decoration: underline;
+}
+nav ul li ol {
+	margin: 0px 0px 0px 0px;
+	color: #fff;
+}
+
+/* 4. Asides (Important Notes and Side Notes)
+--------------------------------------- */
+
+aside {
+    display: block;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11pt;
+	line-height: 20px;
+    max-width: 525px;
+	margin: 50px 0px 35px 30px;
+	padding: 15px 20px 0px 20px;
+	position: relative;
+}
+aside h4 {
+	font-weight: bold;
+	margin: 0px 0px 5px 70px;
+}
+aside p {
+	margin: 0 0 15px 0;
+}
+aside ul, aside ol {
+	margin-bottom: 14px;
+}
+aside strong.gui {
+	font-size: 11pt;
+}
+em.gui {
+	font-weight: bold;
+	font-style: normal;
+}
+aside em.gui {
+	font-size: 11pt;
+}
+aside.important {
+	border: 1px solid #1a1a1a;
+	background-color: #e5e5e5;
+}
+aside.important:before {
+	display: block;
+	content: "";
+	background: url(Images/Important.png) no-repeat;
+	width: 65px;
+	height: 67px;
+	position: absolute;
+	top: -30px;
+	left: 10px;
+}
+aside.tip {
+	border: 1px solid #888888;
+	background-color: #f0f0f0;
+}
+aside.tip:before {
+	display: block;
+	content: "";
+	background: url(Images/Tip.png) no-repeat;
+	width: 65px;
+	height: 67px;
+	position: absolute;
+	top: -30px;
+	left: 10px;
+}
+
+/* 5. Tables
+--------------------------------------- */
+
+table {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11pt;
+	line-height: 20px;
+	border-collapse: collapse;
+	border-color: 1px solid #000000;
+	margin: 30px 20px 30px 20px;
+	max-width: 750px;
+	/* Uncomment this when you want to see how tables look with the default FlexSim width:
+	max-width: 430px; */
+}
+table td, table th {
+	border: 1px solid black;
+	padding: 7px 7px 10px 7px;
+}
+table th {
+	font-size: 16px;
+	text-align: left;
+	vertical-align: top;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color: #e5e5e5;
+	color: #000000;
+}
+table td {
+	text-align: left;
+	vertical-align: top;
+}
+table tr:nth-child(odd) {
+	background-color: #f5f5f5;
+}
+table ul li {
+	text-align: left;
+	vertical-align: top;
+}
+table ol li {
+	text-align: left;
+	vertical-align: top;
+}
+table ul {
+	vertical-align: top;
+	margin: -1px 0px 0px 0px;
+} 
+table ol {
+	vertical-align: top;
+	margin: -1px 0px 0px 0px;
+} 
+table ul.noindent li {
+	margin: 0px 0px 10px -20px;
+}
+table ol.noindent li {
+	margin: 0px 0px 10px -20px;
+}
+/*  The following styles are classes you can use to style the width of columns;
+	Just make sure each of the columns adds up to 100%
+*/
+th.five {
+	width: 5%;
+}
+th.ten {
+	width: 10%;
+}
+th.fifteen  {
+	width: 15%;
+}
+th.twenty {
+	width: 20%;
+}
+th.twentyfive {
+	width: 25%;
+}
+th.thirty  {
+	width: 30%;
+}
+th.thirtyfive  {
+	width: 35%;
+}
+th.forty  {
+	width: 40%;
+}
+th.fortyfive  {
+	width: 45%;
+}
+th.fifty  {
+	width: 50%;
+}
+th.fiftyfive {
+	width: 55%;
+}
+th.sixty  {
+	width: 60%;
+}
+th.sixtyfive {
+	width: 65%;
+}
+th.seventy {
+	width: 70%;
+}
+th.bottomalign {
+	vertical-align: bottom;
+}
+th.center {
+	text-align: center;
+}
+td.center {
+	text-align: center;
+}
+
+/* 6. Images
+--------------------------------------- */
+
+figcaption {
+    padding: 5px 0px 5px 0px;
+	font-style: italic;
+	font-weight: bold;
+    font-size: smaller;
+}
+figure {
+    margin-bottom: 10px;
+}
+img {
+	margin: 0px 5px 0px 5px;
+}
+img.fullwidth {
+	width: 95%;
+}
+img.framed {
+	border: 1px solid gray;
+}
+img.framed-black {
+	border: 1px solid black;
+}
+.autoresize {
+	max-width: 100%;
+    height: auto;
+} 
+.image-expander-container {
+	position: relative;
+    max-width: 500px;
+    cursor: pointer;
+}
+.image-expander-container .icon {
+	display: none;
+	width: 25px;
+	height: 25px;
+	opacity: 0.8;
+	border-radius: 5px;
+	color: white;
+	text-align: center;
+	line-height: 25px;
+	font-size: 20px;
+	font-weight: bold;
+	background: #ccc;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.image-expander-container:hover .icon {
+	display: block;
+}
+
+
+/* 7. Lists
+--------------------------------------- */
+
+ul, ol /* Left */ {
+    list-style-position:outside;
+    margin: 0 0 30px 10px;
+}
+ol.spacedList li, ul.spacedList li {
+	margin: 1em 0em;
+}
+ol.spacedList li ul li {
+	margin: 0em 0em;
+}
+ol.spacedList li ul.spacedList li {
+	margin: 1em 0em;
+}
+ul.compact li, ol.compact li {
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+ol table {
+	margin: 20px 0px 40px 0px;
+}
+ol aside {
+	margin-left: -20px;
+}
+ul.noList li{
+	list-style-type: none;
+	margin: 1em 0em;
+}
+ul.noListOrSpace li{
+	list-style-type: none;
+	margin: 0em 0em;
+}
+
+/* 8. Tutorials
+--------------------------------------- */
+
+.task  .badge {
+	background: #0d0d0d;
+	/* Alternate color
+	background: #1a1a1a; */
+	border-radius: 50%;
+	width: 65px;
+	height: 65px;
+	display: block;
+	position: absolute;
+	text-align: center;
+	padding-top: 17px;
+	line-height: 125%;
+	box-sizing: border-box;
+	color: #fff;
+	font-family: Arial, Verdana, sans-serif;
+	padding: 14px 5px;
+	font-size: 90%;
+	text-transform: uppercase;
+}
+.task .badge span {
+	font-size: 140%;
+}
+.task h3 {
+	margin-left: 80px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+}
+.task h3 a, .task h3 a:link, .task h3 a:visited {
+	color: #0d0d0d;
+	font-weight: bold;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12pt;
+	margin: 40px 0px 10px 0px; 
+}
+.task p {
+	margin-left: 80px;
+}
+
+
+
+/* This is just for the display of buttons in the CSS Experiment Page */
+
+.btn {
+	float: right;
+	height: 17px;
+	width: 120px;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0 0 20px 10px;
+	display: inline;
+	background: #e5e5e5;
+	background-image: -webkit-linear-gradient(top, #e5e5e5, #e5e5e5);
+	background-image: -moz-linear-gradient(top, #e5e5e5, #e5e5e5);
+	background-image: -ms-linear-gradient(top, #e5e5e5, #e5e5e5);
+	background-image: -o-linear-gradient(top, #e5e5e5, #e5e5e5);
+	background-image: linear-gradient(to bottom, #e5e5e5, #e5e5e5);
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	font-family: Arial;
+	font-size: 8pt;
+	color: #1a1a1a;
+	font-size: 20px;
+	padding: 5px 10px 10px 10px;
+	border: solid #1a1a1a 1px;
+	text-decoration: none;
+}
+
+.btn:hover {
+	background: #666666;
+	background-image: -webkit-linear-gradient(top, #666666, #4d4d4d);
+	background-image: -moz-linear-gradient(top, #666666, #4d4d4d);
+	background-image: -ms-linear-gradient(top, #666666, #4d4d4d);
+	background-image: -o-linear-gradient(top, #666666, #4d4d4d);
+	background-image: linear-gradient(to bottom, #666666, #4d4d4d);
+	text-decoration: none;
+}

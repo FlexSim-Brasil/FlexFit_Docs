@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>RailWorks Basics Tutorial</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="../../../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../../../CSS/prism.css" />
+		<script src="../../../../../CSS/prism.js"></script>
+		<style>
+			/* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+			nav li > ul {
+				margin-bottom: 0px !important;
+			}
+
+			img.inline {
+				display: inline;
+				vertical-align: middle;
+				max-height: 1em;
+				margin: 0;
+				margin-right: 0px;
+			}
+
+			/* For the product table color preview: */
+			.preview-color {
+				display: block;
+				border: solid 1px;
+				width: 50px;
+				height: 20px;
+			}
+
+			.tutorial-image {
+				width: 75%;
+				object-fit: cover;
+				border: 1px solid grey;
+			}
+
+			.tutorial-pf-gui {
+				width: 40%;
+				object-fit: cover;
+				border: 1px solid grey;
+			}
+
+			.tutorial-video {
+				width: 100%;
+				border: 1px solid grey;
+			}
+
+			kbd {
+				background-color: #eee;
+				border-radius: 3px;
+				border: 1px solid #b4b4b4;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+					0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+				color: #333;
+				display: inline-block;
+				font-size: 0.85em;
+				font-weight: 700;
+				line-height: 1;
+				padding: 2px 4px;
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+
+	<body style="text-align: justify">
+		<header>
+			<h1>RailWorks Basics</h1>
+		</header>
+		<section id="introduction">
+			<p>This tutorial will teach you some of the basics of RailWorks. When you have completed all the tasks,
+			you will have used the basic RailWorks objects such as Rail, Rail Control Point, Station and how to
+			use RailWorks processflow activities.</p>
+
+			<p>In this tutorial we will focus on common situations for using a train, for example: coupling a locomotive
+			on a wagon and traveling to its destination; materials and people transportation; unloading or disembarking
+			at a station; and integrating FlexSim objects in the flow. All the basic exercises were thought of in simplified cases,
+			but complete enough to use in various situations. </p>
+		</section>
+		<section id="tasks">
+			<h2>Tasks Covered</h2>
+			<p>This tutorial will cover the following tasks:</p>
+			<div class="task">
+				<div class="badge">
+					Task <span>1.1</span>
+				</div>
+				<h3><a href="1.1-WagonCoupling/WagonCoupling.html">Wagon Coupling</a></h3>
+				<p>In this task you will learn how to create a railway network, create a locomotive, make a simple trip,
+				use RailControlPoint and couple a wagon. This exercise will introduce the basic rules
+				for creating a model with RailWorks and its flow.</p>
+			</div>
+			<div class="task">
+				<div class="badge">
+					Task <span>1.2</span>
+				</div>
+				<h3>
+					<a href="1.2-MaterialTransporting/MaterialTransporting.html">Material Transporting</a>
+				</h3>
+				<p>In this task you will learn how to transport materials between two stations,
+				loading the material in one and unloading in the other, with this you will
+				understand the interactions of Rail Control Point with other objects.</p>
+			</div>
+			<div class="task">
+				<div class="badge">
+					Task <span>1.3</span>
+				</div>
+				<h3>
+					<a href="1.3-FlowItemsCreation/FlowItemsCreation.html">Transport of flow items by a train</a>
+				</h3>
+				<p>In this task a station will receive items from various trains, store and process the items.
+				This model demonstrates how RailWorks objects interact with FlexSim objects, for example Queue
+				and Processors.</p>
+			</div>
+			<div class="task">
+				<div class="badge">
+					Task <span>1.4</span>
+				</div>
+				<h3>
+					<a href="1.4-PeopleSimulation/PeopleSimulation.html">Metro simulation</a>
+				</h3>
+				<p>The final task of this tutorial is to simulate the operation of a subway. The model has two subway
+				stations, one receives people from outside the subway and another receives people by train.</p>
+			</div>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,119 @@
+/* For accordion menus on the Table of Contents pages */
+
+.topnav {
+	max-width: 400px;
+	padding: 40px 28px 25px 0;
+	font-family: "CenturyGothicRegular", "Century Gothic", Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+	padding: 0;
+	margin-left: 55px;
+}
+
+.topnav li {
+	margin: 0;
+	padding: 0;
+	clear: both;
+	list-style: none;
+}
+
+.topnav li a {
+	line-height: 25px;
+	min-height: 25px;
+	font-size: 12px;
+	padding: 0px 0px 0px 20px;
+	color: #000;
+	display: block;
+	text-decoration: none;
+	position: relative;
+}
+
+.topnav ul {
+	margin: 0;
+	padding: 0;
+	margin-left: 20px;
+}
+
+.topnav ul li a:hover {
+	background-color:#D3C99C;
+	color:#675C7C;
+}
+
+.topnav ul li.selected > a:only-child {
+	background-color:#D3C99C;
+	color:#675C7C;
+}
+
+.topnav span{
+	float:right;
+}
+@font-face {
+  font-family: 'arrows';
+  src: url('font/arrows.eot?2036313');
+  src: url('font/arrows.eot?2036313#iefix') format('embedded-opentype'),
+       url('font/arrows.woff?2036313') format('woff'),
+       url('font/arrows.ttf?2036313') format('truetype'),
+       url('font/arrows.svg?2036313#arrows') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.topnav li > a:before {
+	content: '-';
+	font-family: "arrows";
+	font-style: normal;
+	font-weight: normal;
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	font-variant: normal;
+	text-transform: none;
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 15px;
+	height: 25px;
+	line-height: 29px;
+}
+
+.topnav li > a:not(:only-child) {
+	font-size: 14px;
+	font-weight: bolder;
+}
+
+.topnav li > a:not(:only-child):hover {
+	background-color:#0d0d0d;
+	color:white;
+}
+
+/* This is the style for the arrow going right*/
+.topnav li > a:not(:only-child):before {
+	content: '\e800';
+}
+
+/* This is the style for the arrow going down*/
+.topnav li.selected > a:not(:only-child):before {
+	content: '\e801';
+}
+
+@font-face {
+  font-family: 'arrows';
+  src: url('font/arrows.eot?2036313');
+  src: url('font/arrows.eot?2036313#iefix') format('embedded-opentype'),
+       url('font/arrows.woff?2036313') format('woff'),
+       url('font/arrows.ttf?2036313') format('truetype'),
+       url('font/arrows.svg?2036313#arrows') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media (hover: none) {
+    .topnav a:hover {
+        background-color: inherit !important;
+        color: inherit !important;
+    }
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tutorial Exercise 3.2</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../../../../CSS/prism.css" />
+		<script src="../../../../../../CSS/prism.js"></script>
+    <style>
+        /* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+        nav li>ul {
+            margin-bottom: 0px !important;
+        }
+
+        img.inline {
+            display: inline;
+            vertical-align: middle;
+            max-height: 1em;
+            margin: 0;
+            margin-right: 0px;
+        }
+
+        /* For the product table color preview: */
+        .preview-color {
+            display: block;
+            border: solid 1px;
+            width: 50px;
+            height: 20px;
+        }
+
+        .tutorial-image {
+            width: 75%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-pf-gui {
+            width: 40%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-video {
+            width: 100%;
+            border: 1px solid grey;
+        }
+
+        kbd {
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+            color: #333;
+            display: inline-block;
+            font-size: .85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body style="text-align: justify">
+    <header>
+        <h1>Tutorial Exercise 3.2</h1>
+        <nav>
+            <ul>
+                <li><a href="#exercise">Exercise Information</a></li>
+                <li><a href="#create">Creating objects</a></li>
+                <li><a href="#processflow">Processflow Configuration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="exercise">
+        <h2>Exercise Information</h2>
+        <p>
+            A rail yard, railway yard, railroad yard (US), or simply yard, is a series of tracks in a rail 
+            network used for storing, sorting, and loading and unloading rail vehicles and locomotives. This 
+            model simulates the process of a local locomotive sorting six wagons based on their types (1, 2, 
+            and 3). A global locomotive brings the wagons into the yard. Then, a local locomotive transports 
+            each wagon individually to different destinations, determined by their respective types.
+        </p>
+    </section>
+    <section id="create">
+        <h2><span>Step 1</span> Creating objects</h2>
+        <p>
+            To arrive at a solution for the problem, you should generate the following objects (refer to the 
+            modeling pictures and videos for a more comprehensive grasp):
+        </p>
+        <ul>
+            <li>Create five Rails: two of size 25m, two of size 150m, and one of approximately 15m.</li>
+            <li>Pair the 25m and 150m Rails together, then connect both paths at the end with the 15m Rail.</li>
+            <li>Create a SourceTrain and connect it to the first and leftmost Rail for the arrival of the global locomotive.</li>
+            <li>Add a RailControlPoint at the end of the global locomotive track.</li>
+            <li>Add another RailControlPoint at the beginning of the wagon pickup track.</li>
+        </ul>
+        
+        <p>The first part of your model should look like this:</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise8" src="Images/GlobalAndWagonTrack.png" class="autoresize framed" />
+        </p>
+
+        <p>Now, let's set up the items created in this step:</p>
+        <ul>
+            <li>Create an "On Exit" trigger on the SourceTrain.</li>
+            <li>Configure the trigger to assign a label and set the color based on conditions.</li>
+            <li>Add a label named "Type" with a value of 4.</li>
+            <li>For color assignment based on conditions, use the "Type" label and select a color from the palette.</li>
+        </ul>
+        
+        <p> <img class="tutorial-image" alt="Exercise8" src="Images/SourceTrainTriggers.png" class="autoresize framed" /> </p>
+           
+        <p>The next step is to configure the local locomotive track.</p>
+        <ul>
+            <li>Create three Rails: two of 40m and one of 15m.</li>
+            <li>The first 40m Rail will extend the previous section, while the other 40m Rail will run parallel to it.</li>
+            <li>The smallest Rail will connect the two ends, allowing the local locomotive to access the wagon pickup tracks.</li>
+            <li>Add a SourceTrain connected to the end of the rightmost Rail (not connected to the main tracks).</li>
+            <li>Configure the same triggers used for SourceTrain1 to SourceTrain2, using Type 7 for this locomotive.</li>
+        </ul>
+
+        <p>The second part of your model should look like this:</p>
+        <p> <img class="tutorial-image" alt="Exercise8" src="Images/LocalLocomotiveTrack.png" class="autoresize framed" /> </p>
+
+        <p>The final step is to construct the yard for storing wagons by type.</p>
+        <ul>
+            <li>Create five 40m Rails to extend along the main tracks.</li>
+            <li>Add three intersections to the last three Rails.</li>
+            <li>Connect three parallel Rails (for types 1, 2, and 3) measuring at least 70m to the mentioned intersections.</li>
+            <li>Attach one RailControlPoint to the leftmost tip of each parking track for every type.</li>
+            <li>Include one RailControlPoint at the end of the main access track.</li>
+        </ul>
+
+
+        <p>The last part of your model should be look like this:</p>
+        <p> <img class="tutorial-image" alt="Exercise8" src="Images/TypeYard.png" class="autoresize framed" /> </p>
+
+        <p>Uniting the individual parts, your model should look like this.</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise7Objs" src="Images/Exercise7Objs.png"
+                class="autoresize framed" /><br />
+        </p>
+    </section>
+
+    <section id="processflow">
+        <h2><span>Step 2</span> Processflow Configuration</h2>
+        <p>
+            To achieve the solution for the problem, follow these steps to create the
+            necessary processflow tasks:
+        </p>
+        <p>Wagon Creation:</p>
+        <ul>
+            <li>Create a List resource.</li>
+            <li>Create a Schedule Source.</li>
+            <li>Create a "Create Wagon" activity.</li>
+            <li>Create a "Change Visual" activity.</li>
+            <li>Create a "Push to List" activity and link it to the list resource.</li>
+
+            <li>Configure the Schedule Source with 6 entries, each generating 1 wagon at time 0.</li>
+            <li>Configure the "Create Wagon" activity to generate only 1 wagon. Reference the 
+                RailControlPoint placed at the end of the Global Locomotive track. Create the wagons 
+                in reverse by checking the reverse checkbox. </li>
+            <li>Set the Wagon/Car type to "Hopper Wagon" (thia allows for color changes). And on "Assign Labels to Created Objects", 
+                create a label "Type" and assign a statistical distribution d uniform, with maximum value 3.</li>
+            <li>Configure the "Change Visual" activity to Set Color By Case. Change the Value field to "token.wagon.Type" and
+                Object, "token.wagon" .</li> 
+            <li>Ensure the "Push to List" activity is linked to the list resource. Configure 
+                Push Value to "token.wagon".</li> 
+        </ul>
+
+<p>After completing these steps, your processflow should appear as follows:</p>
+
+
+        <p>
+            <img class="tutorial-pf-gui" alt="Exercise8PF" src="Images/WagonCreationPF.png"
+                class="autoresize framed" /><br />
+        </p>
+
+        <p>Global Train Configuration:</p>
+        <ul>
+            <li>Create a Schedule Source.</li>
+            <li>Create a "CreateTrain" activity.</li>
+            <li>Create a "PullFromList" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "CoupleWagon" activity.</li>
+            <li>Create two sequential "MoveTrain" activities.</li>
+            <li>Create a "DecoupleWagon" activity.</li>
+            <li>Create another "CreateTrain" activity.</li>
+            <li>Create another "MoveTrain" activity.</li>
+
+            <li>Configure the Schedule Source to deliver 1 train with a 5-second offset.</li>
+            <li>Configure the "CreateTrain" activity to reference the SourceTrain1 linked to 
+                the Global Locomotive track.</li>
+            <li>Configure the "PullFromList" activity to reference the list resource. Set the
+                 request number and required number to 6. Assign the token to "token.wagon".
+                Check the "Leave Entries On List".</li>
+            <li>Configure the "MoveTrain" destination to the label "token.wagon".</li>
+            <li>Configure the coupling of your train to the wagons using their token labels.</li>
+            <li>Configure the next "MoveTrain" activity to move to a forward rail (Rail4/Rail5 in 
+                the image showing the main track), allowing all wagons to access the main track.</li>
+            <li>Configure the second "MoveTrain" activity to park at the RailControlPoint on the 
+                wagon pickup track.</li>
+            <li>Configure the "DecoupleWagon" to set the control point to the one used for parking on wagon 
+                pickup track.</li>
+            <li>Configure the second "CreateTrain" activity to create a Local locomotive and set its 
+                token differently from the previous one.</li>
+            <li>Configure the last "MoveTrain" activity to use one of the main track rails setting the 
+                destiny to the RailControlPoint at the end of the main track, enabling 
+                the local locomotive's access to the main track with wagons.</li>
+        </ul>
+
+
+        
+        <p>
+            <img class="tutorial-pf-gui" alt="Exercise8PF" src="Images/GlobalTrainPF.png"
+                class="autoresize framed" /><br />
+        </p>
+        <p>Local Train Configuration:</p>
+        <ul>
+            <li>Create a "PullFromList" activity.</li>
+            <li>Create a "MoveTrain" activity.</li>
+            <li>Create a "CoupleWagon" activity.</li>
+            <li>Create another "MoveTrain" activity.</li>
+
+            <li>Configure the "PullFromList" activity to request 1 and require 1 from the list created 
+                previously. Set the "Assign To" to "token.wagon2".</li>
+            <li>Configure the "MoveTrain" activity to take the local train to the final destination, 
+                using the wagon pulled from the previous activity with "token.wagon2" as destiny.</li>
+            <li>Configure the "CoupleWagon" activity to couple with the pulled wagon.</li>
+            <li>Configure the second "MoveTrain" activity to park at the RailControlPoint at the very 
+                end (rightmost tip) of the main track.</li>
+        </ul>
+
+            <img class="tutorial-pf-gui" alt="Exercise8PF" src="Images/LocalTrainPF.png"
+                class="autoresize framed" /><br />
+        </p>
+
+        <p>Parking Wagons by Type Configuration:</p>
+        <ul>
+            <li>Create a "Decide" activity.</li>
+            <li>Create three parallel "MoveTrain" activities.</li>
+            <li>Create one "DecoupleWagon" activity for each "MoveTrain" activity.</li>
+            <li>Create a final "MoveTrain" activity.</li>
+
+            <li>Configure the "Decide" activity to send tokens to the "Connector By Case," using "token.wagon.Type" 
+                and directing values from 1 to 3 to their respective connectors.</li>
+            <li>Configure each "MoveTrain" activity to go to one of the RailControlPoints at each final parking 
+                track.</li>
+            <li>Configure the "DecoupleWagon" activity to decouple at each respective destination RailControlPoint.</li>
+            <li>Configure the last "MoveTrain" activity to return the Local Locomotive to the RailControlPoint 
+                at the end of the main track.</li>
+            <li>Connect the end of the third part of the processflow to the second part.</li>
+        </ul>
+
+
+        <p>
+            <img class="tutorial-pf-gui" alt="Exercise8PF" src="Images/ParkingByTypePF.png"
+                class="autoresize framed" /><br />
+        </p>
+
+        <p>After following these instructions, your processflow should be look like this.</p>
+        <p>
+            <img class="tutorial-pf-gui" alt="Exercise8PF" src="Images/Exercise7PF.png"
+                class="autoresize framed" /><br />
+        </p>
+        
+        <p>With this configuration your model is ready.</p>
+    </section>
+</body>
+
+</html>

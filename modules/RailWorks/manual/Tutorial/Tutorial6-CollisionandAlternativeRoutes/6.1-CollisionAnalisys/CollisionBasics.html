@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tutorial Exercise 6.1</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../../../../CSS/prism.css" />
+		<script src="../../../../../../CSS/prism.js"></script>
+    <style>
+        /* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+        nav li>ul {
+            margin-bottom: 0px !important;
+        }
+
+        img.inline {
+            display: inline;
+            vertical-align: middle;
+            max-height: 1em;
+            margin: 0;
+            margin-right: 0px;
+        }
+
+        /* For the product table color preview: */
+        .preview-color {
+            display: block;
+            border: solid 1px;
+            width: 50px;
+            height: 20px;
+        }
+
+        .tutorial-image {
+            width: 75%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-pf-gui {
+            width: 40%;
+            object-fit: cover;
+            border: 1px solid grey;
+        }
+
+        .tutorial-video {
+            width: 100%;
+            border: 1px solid grey;
+        }
+
+        kbd {
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+            color: #333;
+            display: inline-block;
+            font-size: .85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body style="text-align: justify">
+    <header>
+        <h1>Tutorial Exercise 6.1</h1>
+        <nav>
+            <ul>
+                <li><a href="#exercise">Exercise Information</a></li>
+                <li><a href="#Track">Track Layout</a></li>
+                <li><a href="#Processflow">Processflow Configuration</a></li>
+                <li><a href="#Analysis">Collision Detection & Analysis</a></li>
+                <li><a href="#Paths">MandatoryPaths</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="exercise">
+        <h2>Exercise Information</h2>
+        <p>
+            Two trains travel on a single track, on opposite directions. The track has a single lane and 
+            the two trains destination is on the other side of the track. Increment the main model by 
+            adding a detour, allowing both trains to avoid collision and reach their destination.
+        </p>
+    </section>
+    
+	<section id="Track">
+        <h2><span>Step 1</span> Track Layout</h2>
+        <p>
+            To create the track layout, follow the steps below:
+        </p>
+		<ul>
+            <li>Drag 5 Rail objects to the model and connect them on a straight line.</li>
+            <li>Drag 2 Locomotives and connect them to opposite ends of the track using the "A" key.</li>
+            <li>Create 2 RailControlPoints at each end of the track.</li>
+        </ul>
+
+		<p>Your model should be looking like this:</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise61Objs" src="Images/Exercise61Objs.png"
+                class="autoresize framed" /><br />
+        </p>
+			
+    </section>
+
+    <section id="Processflow">
+        <h2><span>Step 2</span> Processflow Configuration</h2>
+        <p>
+            In order to achieve the solution for the problem, you should create the
+            following objects:
+        </p>
+        <ul>
+            <li>Create two Schedule Sources, configure them to release 1 train at time 0.</li>
+            <li>Create two AssignLabel, set the label name as "train" and the value as each respective locomotive.</li>
+            <li>Create two MoveTrains, set one for each Train.</li>
+            <li>Configure the MoveTrains to have the RailControlPoints as destination, on opposite sides.</li>
+            
+		</ul>
+        <p>Your Processflow should be looking like this:</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise61PF" src="Images/Exercise61PF.png"
+                class="autoresize framed" /><br />
+        </p>
+
+        
+    </section>
+
+    <section id="Analysis">
+        <h2><span>Step 3</span> Collision Detection & Analysis</h2>
+        <p>
+            The first step to set collision detection is to drag any RailWorks object to model and 
+            create a RailSystem.
+			<br>
+			<br>
+			To access the collision settings, follow the steps:
+        </p>
+		<ul>
+            <li>Drag one Rail to the model.</li>
+            <li>Access the RailSystem properties and mark the "Train Collision" checkbox.</li>
+            <li>Proceed to set up a collision detection tick in milliseconds, 50 ms is a good startpoint.</li>
+            <li>With these steps, collision detection is now activated.</li>
+            <li>Run the model and identify the exact point where the trains collide.</li>
+		</ul>
+
+        <p>
+            <img
+                class="tutorial-image"
+                alt="CollisionSettings"
+                src="Images/CollisionSettings.png"
+                class="autoresize framed"
+            /><br />
+    </p>
+    </section>
+
+    <section id="#Paths">
+        <h2><span>Step 4</span> Mandatory Paths</h2>
+        <p>
+            In order to avoid the collision, do the following modification.
+        </p>
+        <ul>
+            <li>Create a detour on the collision Rail, using 3 Rails.</li>
+            <li>Connect them to create an alternative route to avoid traffic.</li>
+            <li>Alter one of the MoveTrain activity by ticking the "Use Mandatory Rails" checkbox.</li>
+            <li>Alter one of the MoveTrain activities to have the paralel detour rail as a MandatoryRail.</li>
+            
+		</ul>
+        <p>The MoveTrain activity should be similar to the image below.</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise61MoveTrain" src="Images/Exercise61MoveTrain.png"
+                class="autoresize framed" /><br />
+        </p>
+        <p>Your model should be looking like this:</p>
+        <p>
+            <img class="tutorial-image" alt="Exercise61alteration" src="Images/Exercise61alteration.png"
+                class="autoresize framed" /><br />
+        </p>
+
+    </section>
+
+</body>
+</html>

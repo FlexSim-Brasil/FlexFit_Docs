@@ -1,0 +1,209 @@
+/* ========== Printable Version Text Styles ========== */
+
+/* 
+Table of Contents
+    1. General Styles
+	2. Headings
+	3. Header and Nav (for Internal Table of Contents)
+	4. Asides (Important Notes and Side Notes)
+	5. Tables
+	6. Images
+	7. Lists
+	8. Tutorials
+
+--------------------------------------- */
+
+
+/* 1. General Styles
+--------------------------------------- */
+
+@import "FlexsimHelpStandard.css";
+
+.printhidden {visibility:hidden;display:none}
+a{text-decoration:none} /*color:#000000;*/
+
+p,ul,ol,pre /* Left */
+{
+	margin: 5px 0px 5px 25px; /*CHANGED*/
+}
+
+p {
+	margin-bottom: 20px;
+}
+
+/* 2. Headings
+--------------------------------------- */
+
+h1 
+{
+	page-break-before: always;
+}
+
+/* 3. Header and Nav (for Internal Table of Contents)
+--------------------------------------- */
+
+.header {
+	background-color: #fff;
+	margin: 0px 0px 10px -40px;
+	/* to center in page 
+	margin: 0 auto; */
+}
+
+.nav {
+	background-color: #fff;
+	border: 1px solid #1a1a1a;
+	border-left: 0px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11pt;
+	width: 100px;
+	padding: 10px 10px 20px 10px;	
+}
+.nav ul {
+	list-style-type: none;
+	margin: 0 0 10px 0;
+}
+.nav ul li {
+	margin-left: 40px;
+}
+.nav a:link, nav a:visited {
+	border: none;
+	text-decoration: none;
+	font-style: normal;
+	color: #fff;
+}
+.nav a:hover {
+	text-decoration: underline;
+}
+.nav ul li ol {
+	margin: 0px 0px 0px 0px;
+	color: #fff;
+}
+
+
+/* 4. Asides (Important Notes and Side Notes)
+--------------------------------------- */
+
+.aside {
+	border: 1px solid #000;
+	display: block;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11pt;
+	line-height: 20px;
+    max-width: 525px;
+	margin: 50px 0px 35px 30px;
+	padding: 15px 20px 20px 20px;
+	position: relative;
+}
+.aside h4 {
+	font-weight: bold;
+	margin: 0px 0px 5px 70px;
+}
+.aside p {
+	margin: 0 0 15px 0;
+}
+.aside ul, .aside ol {
+	margin-bottom: 14px;
+}
+.aside strong.gui {
+	font-size: 11pt;
+}
+
+/* 5. Tables
+--------------------------------------- */
+
+table {
+	margin: 5px 300px 10px -30px;
+	/* be forewarned that NOTHING works */
+}
+
+ul table {
+	margin: 5px 300px 10px -30px;
+}
+
+ol table {
+	margin: 5px 300px 10px -30px;
+}
+
+/* 6. Images
+--------------------------------------- */
+
+ul p {
+	margin-left: -30px;
+}
+
+ol p {
+	margin-left: -30px;
+}
+
+
+
+/* 7. Lists
+--------------------------------------- */
+
+ul
+{
+	margin-left: 50px;
+	list-style-position: outside;
+}
+ol
+{
+	margin-left: 50px;
+	list-style-position: outside;
+}
+
+
+/* 8. Tutorials
+--------------------------------------- */
+
+.task {
+	margin-top: 80px;
+}
+
+.badge {
+	background: #0d0d0d;
+	border-radius: 50%;
+	width: 65px;
+	height: 65px;
+	display: block;
+	position: absolute;
+	text-align: center;
+	padding-top: 17px;
+	line-height: 125%;
+	box-sizing: border-box;
+	color: #fff;
+	font-family: Arial, Verdana, sans-serif;
+	padding: 14px 5px;
+	font-size: 90%;
+	text-transform: uppercase;
+}
+.task .badge span {
+	font-size: 140%;
+}
+.task h3 {
+	margin-left: 80px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+}
+.task h3 a, .task h3 a:link, .task h3 a:visited {
+	color: #0d0d0d;
+	font-weight: bold;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12pt;
+	margin: 40px 0px 10px 0px; 
+}
+.task p {
+	margin-left: 80px;
+}
+.nav ul li ol li {
+	color: #000;
+}
+
+
+/* 9. Sections
+--------------------------------------- */
+
+.section
+{
+	margin-left: -40px;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to RailWorks</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="../../../CSS/FlexsimHelpStandard.css" />
+		<link rel="stylesheet" href="../../../CSS/prism.css" />
+		<script src="../../../CSS/prism.js"></script>
+		<style>
+			/* We have nested lists in the table of contents that get a little too much spacing at the bottom */
+			nav li > ul {
+				margin-bottom: 0px !important;
+			}
+
+			img.inline {
+				display: inline;
+				vertical-align: middle;
+				max-height: 1em;
+				margin: 0;
+				margin-right: 0px;
+			}
+
+			/* For the product table color preview: */
+			.preview-color {
+				display: block;
+				border: solid 1px;
+				width: 50px;
+				height: 20px;
+			}
+		</style>
+	</head>
+
+	<body style="text-align: justify">
+		<header>
+			<h1>RailWorks Concepts</h1>
+			<nav>
+				<ul>
+					<li><a href="#intro">Introduction</a></li>
+					<li><a href="#railworks-concept">RailWorks Concepts</a></li>
+					<li>
+						<a href="#railworks-solution">RailWorks Solution</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<section id="intro">
+			<h2>Introduction</h2>
+			<p>
+				The FlexSim Brazil RailWorks module consists of premade custom
+				objects, designed to represent a real environment for the Rail
+				problem modeling, with less configuration. Our approach is to
+				unite
+				<a href="3DObjects.html">3D modeling</a> with the
+				<a href="ProcessFlow.html">Process Flow</a> functionality,
+				allowing object configuration and visualization through the
+				native 3D FlexSim solution, and the rail system events to be
+				triggered by the Process Flow, using not only defaults FlexSim
+				Process Flow activities, but also new ones developed by our
+				team.
+			</p>
+		</section>
+		<section id="railworks-concept">
+			<h2>Railworks Concepts</h2>
+			<p>
+				Our solution simplifies the modeling process of the paths with
+				the rails objects, the user must create the rails and connect
+				them via proximity, that alone creates the path network on our
+				path detection system. With this approach, you only need to
+				indicate the positions which the train must move to, via process
+				flow, and it will start moving.
+			</p>
+			<p>
+				Train movement, transporting material, loading material,
+				unloading material, fueling trains on a station, coupling and
+				decoupling trains, creating yards structures for storing and
+				sorting trains, you can model all those processes with the
+				RailWorks library.
+			</p>
+		</section>
+		<section id="railworks-solution">
+			<h2>Railworks Solution</h2>
+			<p>
+				FlexSim's solution for the rail system has two major differences
+				from other market solutions. The first one would be that the
+				RailWorks has two specific objects that represent the tasks
+				present on a rail system (load/unload, refuel), while other
+				solutions use more generic tasks to represent the process
+				problem, this leads to more incomplete results. We consider
+				every aspect during the task, like the possible amount to be
+				unloaded or loaded, train weight, train volume, the time to
+				complete the task, and so on, supported by the flexibility and
+				task management of Process Flow.
+			</p>
+			<p>
+				Another huge difference is the way train movement usually works,
+				on other solutions you either point the destination to each
+				movement sector, making it take short steps towards its destiny,
+				or you just make the train move forward, in this way the train
+				will only go ahead considering the current switches states.
+			</p>
+		</section>
+	</body>
+</html>
