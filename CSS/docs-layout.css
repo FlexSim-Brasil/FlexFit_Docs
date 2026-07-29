@@ -45,6 +45,24 @@ body.docs-with-sidebar {
 	margin: 0;
 	padding: 0 40px 60px 40px;
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.docs-footer {
+	margin-top: auto;
+	padding-top: 40px;
+	border-top: 1px solid #e8e8e8;
+	text-align: center;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 1.4;
+	color: #666;
+}
+
+.docs-footer p {
+	margin: 0;
 }
 
 /* Flush content header with sidebar top — stripe lines align at y=0 */

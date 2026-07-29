@@ -77,8 +77,9 @@ function buildSidebarHtml(navHtml, imagesPath) {
 \t\t\t<div class="sidebar-nav">
 \t\t\t\t${navHtml}
 \t\t\t</div>
-\t\t\t<div class="sidebar-brand sidebar-brand--flexsim">
-\t\t\t\t<img src="${imagesPath}logo_FS.png" alt="FlexSim" />
+\t\t\t<div class="sidebar-brand sidebar-brand--partners">
+\t\t\t\t<img src="${imagesPath}logo_FS.png" alt="FlexSim" class="sidebar-brand__logo sidebar-brand__logo--fs" />
+\t\t\t\t<img src="${imagesPath}logo_EYF.png" alt="EYF Solutions" class="sidebar-brand__logo sidebar-brand__logo--eyf" />
 \t\t\t</div>`;
 }
 
@@ -166,8 +167,11 @@ ${bodyOpen}
 \t\t<aside class="docs-sidebar" aria-label="Navegação">
 ${sidebarHtml}
 \t\t</aside>
-\t\t<main class="docs-content">
+\t	\t<main class="docs-content">
 ${bodyContent}
+\t\t\t<footer class="docs-footer">
+\t\t\t\t<p>2026® EYF Solutions</p>
+\t\t\t</footer>
 \t\t</main>
 \t</div>
 \t<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

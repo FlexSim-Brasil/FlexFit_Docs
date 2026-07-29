@@ -44,21 +44,33 @@
 	object-position: center;
 }
 
-/* FlexSim logo — footer of sidebar */
-.sidebar-brand--flexsim {
+/* Partner logos — footer of sidebar */
+.sidebar-brand--partners {
 	flex-shrink: 0;
-	padding: 14px 20px 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	padding: 14px 16px 18px;
 	border-top: 1px solid #e8e8e8;
 	background-color: #fafafa;
-	text-align: center;
 }
 
-.sidebar-brand--flexsim img {
+.sidebar-brand__logo {
 	display: block;
-	max-width: 140px;
-	width: 100%;
 	height: auto;
-	margin: 0 auto;
+	object-fit: contain;
+}
+
+.sidebar-brand__logo--fs {
+	max-width: 110px;
+	width: 100%;
+}
+
+.sidebar-brand__logo--eyf {
+	max-width: 100px;
+	width: 100%;
+	border-radius: 2px;
 }
 
 .docs-sidebar .topnav {
