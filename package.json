@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "node scripts/build-docs.mjs"
+  },
   "dependencies": {
     "cheerio": "^1.2.0"
   }
