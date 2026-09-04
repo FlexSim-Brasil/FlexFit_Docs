@@ -65,8 +65,8 @@
         
         <h3 id="f-analysis-name" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">1. Analysis Name</h3>
         <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">A free-form name for the analysis (e.g. <em>Compressors</em>, <em>Pumps_Jan2026</em>). It defines the name of the results folder, always in the format:</p>
-        <div style="font-family:Consolas,'Courier New',monospace;font-size:13px;background:#f4f4f4;border:1px solid #ddd;padding:8px 11px;margin:0 0 8px;color:#1a1a1a;">YYMMDD_G_{Name}_V01</div>
-        <p style="font-size:13px;line-height:1.6;color:#666;margin:0 0 10px;max-width:76ch;">YYMMDD = today's date · G = general curves · V01 = first version of this analysis.</p>
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:13px;background:#f4f4f4;border:1px solid #ddd;padding:8px 11px;margin:0 0 8px;color:#1a1a1a;">YYMMDD_{Name}_V01</div>
+        <p style="font-size:13px;line-height:1.6;color:#666;margin:0 0 10px;max-width:76ch;">YYMMDD = today's date · V01 = first version of this analysis.</p>
 
         <h3 id="f-file-upload" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">2. File Upload / "Input files" list</h3>
         <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Add one or more files (folder button or drag and drop). Accepted formats: Excel (.xlsx, .xls, .xlsm, .xlsb), CSV (.csv, .tsv, .txt), Parquet and databases (.db, .sqlite). Every numeric column of every file becomes an independent dataset in the final ranking.</p>
@@ -85,7 +85,10 @@
         <h3 id="f-refit" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">5. Refit</h3>
         <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Optional checkbox next to the Run button. See <a href="#refit">How Refit works</a> — worth understanding before deciding whether to turn it on.</p>
 
-        <h3 id="f-run" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">6. Run</h3>
+        <h3 id="f-minmax" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">6. Include Min/Max</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Optional checkbox next to Refit. When on, the exported Excel workbook gets two extra columns in the <strong>Results</strong> sheet — Min and Max, taken from the raw data of each dataset — ready to paste into FlexSim's distribution table as cutoff parameters. See <a href="#results-excel">The exported Excel workbook</a>.</p>
+
+        <h3 id="f-run" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">7. Run</h3>
         <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Starts the data cleaning and the distribution fitting. A progress bar follows the steps; when it finishes, the app switches on its own to the <em>Results</em> tab with a summary of the files and datasets processed.</p>
       </section>
 
@@ -177,7 +180,7 @@
         </figure>
         
         <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 8px;max-width:76ch;text-align:justify;">The focused distribution appears in a format ready to use in FlexSim, and the icon beside it copies the whole string (name + parameters):</p>
-        <div style="font-family:Consolas,'Courier New',monospace;font-size:13px;background:#f4f4f4;border:1px solid #ddd;padding:8px 11px;margin:0 0 18px;color:#1a1a1a;">beta(1.26667, 9095.97, 0.443915, 2.58057)</div>
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:13px;background:#f4f4f4;border:1px solid #ddd;padding:8px 11px;margin:0 0 18px;color:#1a1a1a;">gamma(0.991412, 21.366221, 1.353314)</div>
 
         <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">The badge next to the Score summarises the quality of the fit:</p>
         <table style="width:100%;max-width:640px;font-size:13px;margin:0 0 8px;">
@@ -189,19 +192,68 @@
           </thead>
           <tbody>
             <tr>
-              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#e6f4ea;border:1px solid #b7dcc3;color:#1a6b3a;">Good</span></td>
-              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Good fit — you can use it with confidence.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#e6f4ea;border:1px solid #b7dcc3;color:#1a6b3a;">⭐ Excellent</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Score ≥ 90 — excellent fit.</td>
             </tr>
             <tr>
-              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#faf1de;border:1px solid #e7cf9e;color:#8a5a11;">Acceptable</span></td>
-              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Acceptable, but worth checking the diagnostic charts before deciding.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#e6f4ea;border:1px solid #b7dcc3;color:#1a6b3a;">🟢 Good</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Score 70-89 — good fit, you can use it with confidence.</td>
             </tr>
             <tr>
-              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#fbe9e9;border:1px solid #eec4c4;color:#a4292f;">Poor</span></td>
-              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Low score — the distribution did not fit the data well.</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#faf1de;border:1px solid #e7cf9e;color:#8a5a11;">🟡 Acceptable</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Score 50-69 — acceptable, but worth checking the diagnostic charts before deciding.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#fbe9e9;border:1px solid #eec4c4;color:#a4292f;">🟠 Poor</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Score 30-49 — low score, the distribution did not fit the data well.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;vertical-align:top;"><span style="display:inline-block;padding:1px 8px;font-size:12px;background:#fbe9e9;border:1px solid #eec4c4;color:#a4292f;">🔴 Very Poor</span></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Score below 30 — the distribution is not a viable option for this dataset.</td>
             </tr>
           </tbody>
         </table>
+
+        <h3 id="f-erro" style="font-size:15px;margin:22px 0 6px;scroll-margin-top:16px;">Erro</h3>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Next to the Score, <strong>Erro</strong> shows the Kolmogorov-Smirnov statistic as a percentage — the largest gap between the real data's cumulative curve and the fitted curve's, at its single worst point. While the Score ranks this distribution against the others tested, Erro answers a different question: how far off is this specific curve from the data, on its own.</p>
+
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 10px;max-width:76ch;text-align:justify;">Because they answer different questions, Score and Erro do not always move together. Here is what each combination means in practice:</p>
+        <table style="width:100%;max-width:760px;font-size:13px;margin:0 0 18px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:110px;">Score</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:110px;">Erro</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;">What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Good (≥70)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Good (low)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Strong signal — the curve fits well both overall and at its worst point. The ideal case; use it with confidence.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Good (≥70)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Poor (high)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">The fit is good "overall" (the other tests compensate), but there is one specific point — usually in the tail — where the curve drifts noticeably from the real data. Worth checking the diagnostic charts before deciding.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Poor (&lt;50)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Good (low)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">More common on very large samples (VERY_LARGE), where Score leans on AIC/BIC rather than the statistical tests — the distribution can have a small worst-point error yet still lose the overall comparison against the other candidates.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Poor (&lt;50)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Poor (high)</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Both signals agree: not a good distribution for this dataset.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="border:1px solid #ccc;background:#fafafa;padding:10px 12px;margin:0 0 10px;max-width:76ch;">
+          <strong style="display:block;font-size:13.5px;color:#1a1a1a;margin-bottom:4px;">When Erro shows "N/A"</strong>
+          <span style="font-size:13.5px;line-height:1.6;color:#333;">This is not a bug. It happens when the dataset has fewer data points than the distribution has parameters (e.g. a 4-parameter distribution fitted to only 3 samples) — there isn't enough data left to run the underlying statistical test. It is a sign the dataset is too small for that particular distribution, not a system error.</span>
+        </div>
       </section>
 
       <!-- Results : Charts -->
@@ -251,6 +303,62 @@
               <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;font-weight:700;">P-P Plot</td>
               <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Theoretical probability (x axis) vs. empirical probability (y axis), on the [0,1]×[0,1] square.</td>
               <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Points sit on the diagonal across the whole probability range.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Results : Excel workbook -->
+      <section id="results-excel" style="scroll-margin-top:16px;">
+        <h2 style="font-size:22px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid #e0e0e0;">The exported Excel workbook</h2>
+        <p style="font-size:14px;line-height:1.65;color:#333;margin:0 0 12px;max-width:76ch;text-align:justify;">Every processed file gets an Excel workbook saved in the analysis folder, with a <strong>Results</strong> sheet — a single table stacking every dataset and every ranked distribution, ready to paste into FlexSim's own distribution table. This is the main deliverable of the analysis; the Fit panel on screen and the exported dashboard PNG both show the same data this sheet holds.</p>
+        <table style="width:100%;font-size:13px;margin:0 0 8px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;width:160px;">Column</th>
+              <th style="text-align:left;background:#f0f0f0;border:1px solid #ccc;padding:7px 9px;font-weight:700;color:#1a1a1a;">What it shows</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Dataset</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Name of the dataset (file + column).</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Rank</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Position of this distribution in the dataset's ranking — 1 is the best Score.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Regime</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Sample-size bracket used to weight the Score (SMALL, MEDIUM, LARGE, VERY_LARGE).</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">N_Samples</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Number of cleaned data points used for this dataset.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">FlexScript Distribution</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">The formula ready to paste into FlexSim — same string the copy icon in the Fit panel copies.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Python Distribution</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">The same distribution, written in scipy/Python parameter order.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Min / Max <em>(optional)</em></td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Only present when <a href="#f-minmax">Include Min/Max</a> is checked. Minimum and maximum of the <strong>raw data</strong> for this dataset — not the fitted distribution's own cutoff parameters.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Erro</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Same value shown in the <a href="#f-erro">Fit panel</a> — can read "N/A" (not a bug, see above).</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Score</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Same 0-100 ranking value shown in the Fit panel.</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#1a1a1a;vertical-align:top;">Classification</td>
+              <td style="border:1px solid #ccc;padding:7px 9px;color:#333;vertical-align:top;">Same quality badge shown in the Fit panel (Excellent/Good/Acceptable/Poor/Very Poor).</td>
             </tr>
           </tbody>
         </table>
