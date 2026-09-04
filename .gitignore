@@ -19,6 +19,8 @@ site/
 *.log
 
 # Package files
+package-lock.json
+package.json
 *.jar
 
 # Maven
